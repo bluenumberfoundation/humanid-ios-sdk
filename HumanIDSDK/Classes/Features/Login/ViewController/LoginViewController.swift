@@ -237,8 +237,10 @@ extension LoginViewController: LoginPresenterOutput {
     }
 
     func errorLogin(with message: String) {
-        resetTimerLabel()
-        alertVC(with: message)
+        alertVCCompletion(with: message, completion: { _ in
+            self.pinView.resetCode()
+            self.resetTimerLabel()
+        })
     }
 
     func errorRequestOtp(with message: String) {
