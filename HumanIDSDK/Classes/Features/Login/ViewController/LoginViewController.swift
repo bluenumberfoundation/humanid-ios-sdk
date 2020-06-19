@@ -114,16 +114,6 @@ internal class LoginViewController: UIViewController {
         switch sender.state {
         case .began:
             bottomSheetTouchPoint = touchPoint
-        case .changed:
-            if touchPoint.y - bottomSheetTouchPoint.y > 0 {
-                view.endEditing(true)
-                containerView.frame = CGRect(
-                    x: 0,
-                    y: touchPoint.y,
-                    width: containerView.frame.size.width,
-                    height: containerView.frame.size.height
-                )
-            }
         case .ended, .cancelled:
             if touchPoint.y - bottomSheetTouchPoint.y > 100 {
                 self.bgView.alpha = 0.0
@@ -141,19 +131,6 @@ internal class LoginViewController: UIViewController {
             }
         default:
             break
-        }
-    }
-
-    private func showAnimation(isDismiss: Bool) {
-        containerViewBottom.constant = isDismiss ? (bottomSheetViewHeight * -1.0) : 0.0
-
-        UIView.animate(withDuration: 0.25, animations: {
-            self.bgView.alpha = isDismiss ? 0.0 : 0.3
-            self.view.layoutIfNeeded()
-        }) { (_) in
-            if isDismiss {
-                self.dismiss(animated: true)
-            }
         }
     }
 
@@ -216,6 +193,19 @@ internal class LoginViewController: UIViewController {
         timerLabel.text = "Resend code"
         timerLabel.isUserInteractionEnabled = true
         timerLabel.addGestureRecognizer(timerTap!)
+    }
+
+    private func showAnimation(isDismiss: Bool) {
+        containerViewBottom.constant = isDismiss ? (bottomSheetViewHeight * -1.0) : 0.0
+
+        UIView.animate(withDuration: 0.25, animations: {
+            self.bgView.alpha = isDismiss ? 0.0 : 0.3
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            if isDismiss {
+                self.dismiss(animated: true)
+            }
+        }
     }
 }
 
