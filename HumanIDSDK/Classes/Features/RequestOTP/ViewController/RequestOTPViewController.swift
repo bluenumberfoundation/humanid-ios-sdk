@@ -31,8 +31,9 @@ internal class RequestOTPViewController: UIViewController {
         phoneNumberTextField.setFlag(countryCode: .ID)
         phoneNumberTextField.font = UIFont.font(type: .titiliumWebRegular, size: 14)
         phoneNumberTextField.textColor = .white
-        phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "Your phone number", attributes: [.foregroundColor: UIColor.gray])
+        phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "Enter Phone Number", attributes: [.foregroundColor: UIColor.gray])
         phoneNumberTextField.tintColor = .white
+        phoneNumberTextField.becomeFirstResponder()
 
         return phoneNumberTextField
     }()
