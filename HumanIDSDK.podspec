@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
   s.frameworks            = 'UIKit'
   s.dependency 'Swinject', '~> 2.7.1'
   s.dependency 'RxSwift', '~> 5.1.1'
+  s.dependency 'RxCocoa', '~> 5.1.1'
   s.dependency 'RxAlamofire', '~> 5.3.1'
   s.dependency 'FlagPhoneNumber', '~> 0.8.0'
   s.dependency 'VKPinCodeView', '~> 0.4.1'
