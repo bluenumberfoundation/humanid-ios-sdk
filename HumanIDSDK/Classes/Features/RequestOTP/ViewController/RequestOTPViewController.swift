@@ -1,4 +1,6 @@
 import FlagPhoneNumber
+import RxSwift
+import RxCocoa
 
 public protocol RequestOTPDelegate {
 
@@ -38,6 +40,8 @@ internal class RequestOTPViewController: UIViewController {
         return phoneNumberTextField
     }()
 
+    private let disposeBag = DisposeBag()
+
     convenience init() {
         self.init(nibName: "RequestOTPViewController", bundle: Bundle.humanID)
     }
@@ -46,6 +50,7 @@ internal class RequestOTPViewController: UIViewController {
         super.viewDidLoad()
         configureViews()
         setupListener()
+        setupFormValidation()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,9 +81,20 @@ internal class RequestOTPViewController: UIViewController {
         welcomeTnc.addGestureRecognizer(tncTap)
     }
 
-    @IBAction func showOTPModal(_ sender: Any) {
-        view.endEditing(true)
+    func setupFormValidation() {
+        let phoneValid: Observable<Bool> = phoneNumberTextField.rx.text
+            .map { text -> Bool in
+                let isPhoneValid = text!.count >= 1
+                self.setButtonAlpha(isValid: isPhoneValid)
 
+                return isPhoneValid
+        }
+        .share(replay: 1)
+        .distinctUntilChanged()
+        phoneValid.bind(to: enterButton.rx.isEnabled).disposed(by: disposeBag)
+    }
+
+    @IBAction func showOTPModal(_ sender: Any) {
         guard
             let countryCode = phoneNumberTextField.selectedCountry?.phoneCode.replacingOccurrences(of: "+", with: ""),
             let phone = phoneNumberTextField.getRawPhoneNumber() else { return }
@@ -98,21 +114,32 @@ internal class RequestOTPViewController: UIViewController {
     @objc func viewDidShowTnc(_ sender: UITapGestureRecognizer) {
         router?.openTnc()
     }
+
+    private func setButtonAlpha(isValid: Bool) {
+        if !isValid {
+            enterButton.alpha = 0.5
+        } else {
+            enterButton.alpha = 1.0
+        }
+    }
 }
 
 // MARK: - Presenter Delegate
 extension RequestOTPViewController: RequestOTPPresenterOutput {
 
     func showLoading() {
+        view.endEditing(true)
         enterButton.isEnabled = false
         cancelLabel.isHidden = true
         loadingView.isHidden = false
+        setButtonAlpha(isValid: false)
     }
 
     func hideLoading() {
         enterButton.isEnabled = true
         cancelLabel.isHidden = false
         loadingView.isHidden = true
+        setButtonAlpha(isValid: true)
     }
 
     func success() {
@@ -120,7 +147,11 @@ extension RequestOTPViewController: RequestOTPPresenterOutput {
     }
 
     func error(with message: String) {
-        alertVC(with: message)
+        alertVC(with: message, completion: { _ in
+            self.phoneNumberTextField.becomeFirstResponder()
+            self.phoneNumberTextField.text = ""
+            self.setupFormValidation()
+        })
     }
 }
 
