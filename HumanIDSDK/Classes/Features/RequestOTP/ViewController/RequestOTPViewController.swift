@@ -30,12 +30,16 @@ internal class RequestOTPViewController: UIViewController {
 
     lazy var phoneNumberTextField: FPNTextField = {
         let phoneNumberTextField = FPNTextField(frame: CGRect(x: 0, y: 0, width: phoneContainerView.bounds.width - 16, height: 30))
-        phoneNumberTextField.setFlag(countryCode: .ID)
         phoneNumberTextField.font = UIFont.font(type: .titiliumWebRegular, size: 14)
         phoneNumberTextField.textColor = .white
+        phoneNumberTextField.displayMode = .list
+        phoneNumberTextField.delegate = self
         phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "Enter Phone Number", attributes: [.foregroundColor: UIColor.gray])
         phoneNumberTextField.tintColor = .white
         phoneNumberTextField.becomeFirstResponder()
+
+        guard let regionCode = Locale.current.regionCode else { return phoneNumberTextField }
+        phoneNumberTextField.setFlag(countryCode: FPNCountryCode(rawValue: regionCode) ?? .US)
 
         return phoneNumberTextField
     }()
@@ -61,6 +65,11 @@ internal class RequestOTPViewController: UIViewController {
         view.backgroundColor = .twilightBlue
 
         loadingView.isHidden = true
+
+        listController.setup(repository: phoneNumberTextField.countryRepository)
+        listController.didSelect = { [weak self] country in
+            self?.phoneNumberTextField.setFlag(countryCode: country.code)
+        }
 
         phoneContainerView.addSubview(phoneNumberTextField)
 
@@ -152,6 +161,20 @@ extension RequestOTPViewController: RequestOTPPresenterOutput {
             self.phoneNumberTextField.text = ""
             self.setupFormValidation()
         })
+    }
+}
+
+// MARK: - FlagPhoneNumber Delegate
+extension RequestOTPViewController: FPNTextFieldDelegate {
+
+    func fpnDidSelectCountry(name: String, dialCode: String, code: String) {}
+    func fpnDidValidatePhoneNumber(textField: FPNTextField, isValid: Bool) {}
+
+    func fpnDisplayCountryList() {
+        let navVC = UINavigationController(rootViewController: listController)
+        listController.title = "Countries"
+
+        present(navVC, animated: true)
     }
 }
 
