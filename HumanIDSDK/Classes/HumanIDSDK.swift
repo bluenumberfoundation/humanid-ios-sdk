@@ -18,12 +18,13 @@ open class HumanIDSDK {
     }
 
     open func requestOtp(view viewController: UIViewController, name appName: String, image appImage: String) {
-        // MARK: - Open humanID requestOtp page
-        let requestOtpVC = Injector.shared.resolver.resolve(RequestOTPViewController.self)!
-        requestOtpVC.appName = appName
-        requestOtpVC.appImage = appImage
-        requestOtpVC.delegate = viewController as? RequestOTPDelegate
+        // MARK: - Open humanID main page
+        let mainVC = Injector.shared.resolver.resolve(MainViewController.self)!
+        mainVC.modalPresentationStyle = .overFullScreen
+        mainVC.clientName = appName
+        mainVC.clientLogo = appImage
+        // TODO How to resolved delegate issue here
 
-        viewController.present(requestOtpVC, animated: true)
+        viewController.present(mainVC, animated: true)
     }
 }
