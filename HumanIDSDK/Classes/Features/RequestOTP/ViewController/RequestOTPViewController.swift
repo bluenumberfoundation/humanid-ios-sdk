@@ -11,17 +11,18 @@ internal class RequestOTPViewController: UIViewController {
 
     @IBOutlet weak var phoneContainerView: UIView!
     @IBOutlet weak var enterButton: UIButton!
-    @IBOutlet weak var appLogo: UIImageView!
-    @IBOutlet weak var welcomeMessage: UILabel!
-    @IBOutlet weak var welcomeDesc: UILabel!
-    @IBOutlet weak var welcomeTnc: UILabel!
+    @IBOutlet weak var verifyLabel: UILabel!
+    @IBOutlet weak var verifyTnc: UILabel!
     @IBOutlet weak var cancelLabel: UIButton!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     var listController: FPNCountryListViewController = FPNCountryListViewController(style: .grouped)
 
-    var appName = ""
-    var appImage = ""
+    var clientName = ""
 
     var delegate: RequestOTPDelegate?
     var input: RequestOTPInteractorInput?
@@ -77,17 +78,43 @@ internal class RequestOTPViewController: UIViewController {
         enterButton.tintColor = .twilightBlue
         enterButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
 
-        appLogo.image = UIImage(named: appImage)
+        let verifyText = "humanID confirms your phone number "
+        let verifyString = NSMutableAttributedString(string: verifyText)
 
-        welcomeMessage.text = "Welcome to \(appName)"
-        welcomeDesc.text = "Verify your phone number to connect anonymously with \(appName)"
-        welcomeTnc.text = "OTP verification is managed by an independent 3rd party. Number & fingerprints are never visible to humanID or \(appName). Learn More"
+        let verifyTextClient = " sharing it with "
+        let verifyStringClient = NSMutableAttributedString(string: verifyTextClient)
+
+        let verifyBoldText = "without"
+        let verifyAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
+        let verifyAttributed = NSMutableAttributedString(string: verifyBoldText, attributes: verifyAttrs)
+        let verifyClientAttributed = NSMutableAttributedString(string: clientName, attributes: verifyAttrs)
+
+        verifyString.append(verifyAttributed)
+        verifyStringClient.append(verifyClientAttributed)
+
+        let verifyAllString = NSMutableAttributedString()
+        verifyAllString.append(verifyString)
+        verifyAllString.append(verifyStringClient)
+        verifyAllString.append(NSMutableAttributedString(string: ".\nYour data is permanently deleted after verification."))
+
+        verifyLabel.attributedText = verifyAllString
+
+        let tncText = "humanID gives you back control over your privacy. The non profit organization authenticates you without sharing your data or retaining your data.\n"
+        let tncString = NSMutableAttributedString(string: tncText)
+
+        let tncBoldText = "Learn More"
+        let tncAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10)]
+        let tncAttributed = NSMutableAttributedString(string: tncBoldText, attributes: tncAttrs)
+
+        tncString.append(tncAttributed)
+
+        verifyTnc.attributedText = tncString
     }
 
     func setupListener() {
         let tncTap = UITapGestureRecognizer(target: self, action: #selector(self.viewDidShowTnc(_ :)))
-        welcomeTnc.isUserInteractionEnabled = true
-        welcomeTnc.addGestureRecognizer(tncTap)
+        verifyTnc.isUserInteractionEnabled = true
+        verifyTnc.addGestureRecognizer(tncTap)
     }
 
     func setupFormValidation() {
@@ -117,7 +144,7 @@ internal class RequestOTPViewController: UIViewController {
     }
 
     @IBAction func viewDidDismiss(_ sender: Any) {
-        dismiss(animated: true)
+        router?.popCurrentVC()
     }
 
     @objc func viewDidShowTnc(_ sender: UITapGestureRecognizer) {
@@ -182,8 +209,7 @@ extension RequestOTPViewController: FPNTextFieldDelegate {
 extension RequestOTPViewController: LoginDelegate {
 
     func login(with viewModel: Login.ViewModel) {
-        dismiss(animated: true) {
-            self.delegate?.login(with: viewModel.token)
-        }
+        router?.popCurrentVC()
+        delegate?.login(with: viewModel.token)
     }
 }

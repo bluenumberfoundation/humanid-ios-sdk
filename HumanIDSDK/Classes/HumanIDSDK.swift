@@ -23,7 +23,7 @@ open class HumanIDSDK {
         mainVC.modalPresentationStyle = .overFullScreen
         mainVC.clientName = appName
         mainVC.clientLogo = appImage
-        // TODO How to resolved delegate issue here
+        mainVC.router?.parentVC = viewController
 
         viewController.present(mainVC, animated: true)
     }

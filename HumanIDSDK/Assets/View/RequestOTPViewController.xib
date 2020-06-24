@@ -8,14 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="CircularStd-Medium.ttf">
-            <string>CircularStd-Medium</string>
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
         </array>
         <array key="Roboto-Light.ttf">
             <string>Roboto-Light</string>
-        </array>
-        <array key="Roboto-Medium.ttf">
-            <string>Roboto-Medium</string>
         </array>
         <array key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
@@ -24,15 +21,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestOTPViewController" customModule="HumanIDSDK" customModuleProvider="target">
             <connections>
-                <outlet property="appLogo" destination="RsC-Qy-ful" id="xVa-06-QnV"/>
                 <outlet property="cancelLabel" destination="AOM-R4-O5E" id="jn2-IG-Y0T"/>
                 <outlet property="enterButton" destination="m3E-PO-frv" id="yxp-sJ-qzV"/>
                 <outlet property="loadingView" destination="F7N-W2-P9Y" id="VoX-A7-Cca"/>
                 <outlet property="phoneContainerView" destination="zFV-Bh-JYb" id="8AO-G2-b0V"/>
+                <outlet property="verifyLabel" destination="ePR-BY-PHj" id="LYS-uW-Eqr"/>
+                <outlet property="verifyTnc" destination="eAR-gX-xKE" id="GX9-MK-vNY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="welcomeDesc" destination="ePR-BY-PHj" id="YRN-Ja-vP8"/>
-                <outlet property="welcomeMessage" destination="evx-Vw-xqJ" id="6Hy-9o-g4j"/>
-                <outlet property="welcomeTnc" destination="eAR-gX-xKE" id="acH-8j-qft"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -40,26 +35,20 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="RsC-Qy-ful">
-                    <rect key="frame" x="159.5" y="76" width="95" height="95"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Light" translatesAutoresizingMaskIntoConstraints="NO" id="RsC-Qy-ful">
+                    <rect key="frame" x="172.5" y="76" width="69" height="69"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="RsC-Qy-ful" secondAttribute="height" multiplier="1:1" id="8QG-iU-xvu"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Movie DB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evx-Vw-xqJ">
-                    <rect key="frame" x="125.5" y="187" width="163.5" height="20.5"/>
-                    <fontDescription key="fontDescription" name="CircularStd-Medium" family="Circular Std" pointSize="16"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify your phone number to connect anonymously with Movie DB" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePR-BY-PHj">
-                    <rect key="frame" x="40" y="228.5" width="334" height="28.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="humanID confirms your phone number without sharing it with Movie DB. Your data is permanently deleted after verification." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePR-BY-PHj">
+                    <rect key="frame" x="40" y="175" width="334" height="28.5"/>
                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFV-Bh-JYb">
-                    <rect key="frame" x="43" y="275" width="240" height="30"/>
+                    <rect key="frame" x="43" y="221.5" width="240" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="FUn-hf-y40"/>
@@ -67,14 +56,14 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LgT-IN-T9S">
-                    <rect key="frame" x="43" y="304" width="240" height="1"/>
+                    <rect key="frame" x="43" y="250.5" width="240" height="1"/>
                     <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="iig-7F-asQ"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m3E-PO-frv">
-                    <rect key="frame" x="289" y="275" width="80" height="30"/>
+                    <rect key="frame" x="289" y="221.5" width="80" height="30"/>
                     <color key="backgroundColor" red="0.95851677660000001" green="0.76856958870000003" blue="0.39067670700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="24P-XP-x0r"/>
@@ -90,15 +79,15 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAR-gX-xKE">
-                    <rect key="frame" x="16" y="324" width="382" height="23.5"/>
-                    <string key="text">OTP verification is managed by an independent 3rd party. Number &amp; fingerprints are never visible to humanID or Movie DB. Learn More</string>
+                    <rect key="frame" x="16" y="270.5" width="382" height="23.5"/>
+                    <string key="text">humanID gives you back control over your privacy. The non profit organization authenticates you without sharing your data or retaining your data. Learn More</string>
                     <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOM-R4-O5E">
-                    <rect key="frame" x="191.5" y="371.5" width="31" height="24"/>
-                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="10"/>
+                    <rect key="frame" x="191.5" y="318" width="31" height="24"/>
+                    <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="10"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -107,7 +96,7 @@
                     </connections>
                 </button>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="F7N-W2-P9Y">
-                    <rect key="frame" x="197" y="371.5" width="20" height="20"/>
+                    <rect key="frame" x="197" y="318" width="20" height="20"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -115,33 +104,31 @@
             </subviews>
             <color key="backgroundColor" red="0.027450736609999998" green="0.3157523572" blue="0.43999290470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="AOM-R4-O5E" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="2lp-PE-lX7"/>
-                <constraint firstItem="zFV-Bh-JYb" firstAttribute="top" secondItem="ePR-BY-PHj" secondAttribute="bottom" constant="18" id="3Gk-5N-WmB"/>
-                <constraint firstItem="evx-Vw-xqJ" firstAttribute="top" secondItem="RsC-Qy-ful" secondAttribute="bottom" constant="16" id="7dS-UT-12F"/>
-                <constraint firstItem="m3E-PO-frv" firstAttribute="centerY" secondItem="zFV-Bh-JYb" secondAttribute="centerY" id="9DQ-TQ-TcA"/>
-                <constraint firstItem="LgT-IN-T9S" firstAttribute="trailing" secondItem="zFV-Bh-JYb" secondAttribute="trailing" id="DfT-ha-zNE"/>
-                <constraint firstItem="ePR-BY-PHj" firstAttribute="top" secondItem="evx-Vw-xqJ" secondAttribute="bottom" constant="21" id="E6g-P3-PpD"/>
-                <constraint firstItem="m3E-PO-frv" firstAttribute="leading" secondItem="zFV-Bh-JYb" secondAttribute="trailing" constant="6" id="EuS-Ly-6gU"/>
-                <constraint firstItem="ePR-BY-PHj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="EzI-Jb-Qj8"/>
-                <constraint firstItem="eAR-gX-xKE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Hnn-sZ-gcz"/>
-                <constraint firstItem="F7N-W2-P9Y" firstAttribute="top" secondItem="eAR-gX-xKE" secondAttribute="bottom" constant="24" id="JIi-Ut-OrE"/>
-                <constraint firstItem="eAR-gX-xKE" firstAttribute="top" secondItem="zFV-Bh-JYb" secondAttribute="bottom" constant="19" id="Kne-GF-coh"/>
-                <constraint firstItem="LgT-IN-T9S" firstAttribute="bottom" secondItem="zFV-Bh-JYb" secondAttribute="bottom" id="M0V-aD-4NB"/>
-                <constraint firstItem="F7N-W2-P9Y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Q2C-g6-hag"/>
-                <constraint firstItem="AOM-R4-O5E" firstAttribute="top" secondItem="eAR-gX-xKE" secondAttribute="bottom" constant="24" id="Znz-cM-U2e"/>
-                <constraint firstItem="LgT-IN-T9S" firstAttribute="leading" secondItem="zFV-Bh-JYb" secondAttribute="leading" id="brK-Ru-6R9"/>
-                <constraint firstItem="RsC-Qy-ful" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="eSy-8X-x3A"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eAR-gX-xKE" secondAttribute="trailing" constant="16" id="ij3-1U-Afx"/>
-                <constraint firstItem="zFV-Bh-JYb" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" constant="-44" id="qZv-uV-Hjv"/>
-                <constraint firstItem="evx-Vw-xqJ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="uYP-Xm-APL"/>
-                <constraint firstAttribute="trailing" secondItem="ePR-BY-PHj" secondAttribute="trailing" constant="40" id="uoQ-wi-xe3"/>
-                <constraint firstItem="RsC-Qy-ful" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="xiD-L5-yap"/>
+                <constraint firstAttribute="trailing" secondItem="ePR-BY-PHj" secondAttribute="trailing" constant="40" id="03N-Mo-fqH"/>
+                <constraint firstItem="F7N-W2-P9Y" firstAttribute="top" secondItem="eAR-gX-xKE" secondAttribute="bottom" constant="24" id="B0z-mz-ZwV"/>
+                <constraint firstItem="F7N-W2-P9Y" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="HwM-uO-ewy"/>
+                <constraint firstItem="zFV-Bh-JYb" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" constant="-44" id="Kv1-fX-gu3"/>
+                <constraint firstItem="eAR-gX-xKE" firstAttribute="top" secondItem="zFV-Bh-JYb" secondAttribute="bottom" constant="19" id="MOF-M4-GVB"/>
+                <constraint firstItem="zFV-Bh-JYb" firstAttribute="trailing" secondItem="LgT-IN-T9S" secondAttribute="trailing" id="Mb7-bu-OoK"/>
+                <constraint firstItem="RsC-Qy-ful" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="TVf-gf-yMe"/>
+                <constraint firstItem="m3E-PO-frv" firstAttribute="centerY" secondItem="zFV-Bh-JYb" secondAttribute="centerY" id="Uof-W3-EqN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="centerX" secondItem="AOM-R4-O5E" secondAttribute="centerX" id="cvO-2T-lZY"/>
+                <constraint firstItem="ePR-BY-PHj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="ghz-Uq-cCt"/>
+                <constraint firstAttribute="trailing" secondItem="eAR-gX-xKE" secondAttribute="trailing" constant="16" id="hqV-uG-d9I"/>
+                <constraint firstItem="zFV-Bh-JYb" firstAttribute="top" secondItem="ePR-BY-PHj" secondAttribute="bottom" constant="18" id="hqb-JS-K5F"/>
+                <constraint firstItem="ePR-BY-PHj" firstAttribute="top" secondItem="RsC-Qy-ful" secondAttribute="bottom" constant="30" id="l95-Ta-fle"/>
+                <constraint firstItem="m3E-PO-frv" firstAttribute="leading" secondItem="zFV-Bh-JYb" secondAttribute="trailing" constant="6" id="lbj-dk-Llo"/>
+                <constraint firstItem="eAR-gX-xKE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="mSg-pw-JBL"/>
+                <constraint firstItem="zFV-Bh-JYb" firstAttribute="leading" secondItem="LgT-IN-T9S" secondAttribute="leading" id="sFJ-o6-Cde"/>
+                <constraint firstItem="RsC-Qy-ful" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="t97-ff-Q0v"/>
+                <constraint firstItem="zFV-Bh-JYb" firstAttribute="bottom" secondItem="LgT-IN-T9S" secondAttribute="bottom" id="wlF-Qf-Uxy"/>
+                <constraint firstItem="AOM-R4-O5E" firstAttribute="top" secondItem="eAR-gX-xKE" secondAttribute="bottom" constant="24" id="xJU-vi-iRh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="132" y="149"/>
         </view>
     </objects>
     <resources>
-        <image name="Icon" width="95" height="28"/>
+        <image name="Light" width="69" height="69"/>
     </resources>
 </document>

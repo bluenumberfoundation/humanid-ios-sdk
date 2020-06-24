@@ -84,7 +84,7 @@ internal class LoginViewController: UIViewController {
         pinView.trailingAnchor.constraint(equalTo: pinContainerView.trailingAnchor, constant: -40).isActive = true
         pinView.centerYAnchor.constraint(equalTo: pinContainerView.centerYAnchor).isActive = true
 
-        verificationInfo.text = "We just sent a text to +\(countryCode)\(phoneNumber). We will not save or forward this number after the verification"
+        verificationInfo.text = "We just sent a text to (+\(countryCode)) \(phoneNumber). We will not save or forward this number after the verification"
     }
 
     func setupListener() {
@@ -223,8 +223,13 @@ extension LoginViewController: LoginPresenterOutput {
     }
 
     func successLogin(with viewModel: Login.ViewModel) {
-        dismiss(animated: true) {
-            self.delegate?.login(with: viewModel)
+        UIView.animate(withDuration: 0.25, animations: {
+            self.bgView.alpha = 0.0
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            self.dismiss(animated: true) {
+                self.delegate?.login(with: viewModel)
+            }
         }
     }
 
