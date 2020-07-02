@@ -199,7 +199,11 @@ extension RequestOTPViewController: FPNTextFieldDelegate {
         let navVC = UINavigationController(rootViewController: listController)
         listController.title = "Countries"
 
-        present(navVC, animated: true)
+        present(navVC, animated: true) {
+            DispatchQueue.main.async {
+                self.listController.searchController.searchBar.becomeFirstResponder()
+            }
+        }
     }
 }
 
