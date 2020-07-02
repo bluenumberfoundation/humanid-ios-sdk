@@ -85,6 +85,9 @@ internal class LoginViewController: UIViewController {
         pinView.centerYAnchor.constraint(equalTo: pinContainerView.centerYAnchor).isActive = true
 
         verificationInfo.text = "We just sent a text to (+\(countryCode)) \(phoneNumber). We will not save or forward this number after the verification"
+
+        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     func setupListener() {
@@ -166,6 +169,20 @@ internal class LoginViewController: UIViewController {
         }
     }
 
+    @objc func showKeyboard(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardFrame = keyboardSize.cgRectValue
+        let keyboardHeight = keyboardFrame.height
+
+        containerViewBottom.constant = keyboardHeight
+    }
+
+    @objc func hideKeyboard(notification: NSNotification) {
+        containerViewBottom.constant = 0
+    }
+
     private func login(verificationCode: String) {
         invalidateTimer()
 
@@ -196,8 +213,6 @@ internal class LoginViewController: UIViewController {
     }
 
     private func showAnimation(isDismiss: Bool) {
-        containerViewBottom.constant = isDismiss ? (bottomSheetViewHeight * -1.0) : 0.0
-
         UIView.animate(withDuration: 0.25, animations: {
             self.bgView.alpha = isDismiss ? 0.0 : 0.3
             self.view.layoutIfNeeded()
@@ -233,11 +248,10 @@ extension LoginViewController: LoginPresenterOutput {
         }
     }
 
-    func successRequestOtp() {
-        pinView.becomeFirstResponder()
-    }
-
     func errorLogin(with message: String) {
+        containerViewBottom.constant = 0
+        pinView.becomeFirstResponder()
+
         alertVC(with: message, completion: { _ in
             self.pinView.resetCode()
             self.resetTimerLabel()
