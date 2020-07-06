@@ -9,7 +9,7 @@ internal protocol RequestOTPInteractorOutput {
 
     func showLoading()
     func hideLoading()
-    func success(with response: BaseResponse<RequestOTP.Response>)
+    func success(with request: RequestOTP.Request, response: BaseResponse<RequestOTP.Response>)
     func error(with errorResponse: Error)
 }
 
@@ -32,7 +32,7 @@ internal class RequestOTPInteractor: RequestOTPInteractorInput {
             .subscribe(
                 onNext: {[weak self] (response) in
                     self?.output?.hideLoading()
-                    self?.output?.success(with: response)
+                    self?.output?.success(with: request, response: response)
                 },
                 onError: {[weak self] (error) in
                     self?.output?.hideLoading()

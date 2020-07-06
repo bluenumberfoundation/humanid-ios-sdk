@@ -19,7 +19,7 @@ internal struct RequestOTP {
             let otpSessionLifetime: Int64?
             let otpCountLimit: Int?
             let failAttemptLimit: Int?
-            let nextResendDelay: Int64?
+            let nextResendDelay: Int?
             let otpCodeLength: Int?
         }
     }
@@ -33,7 +33,10 @@ internal struct RequestOTP {
         let otpSessionLifetime: Int64
         let otpCountLimit: Int
         let failAttemptLimit: Int
-        let nextResendDelay: Int64
+        let nextResendDelay: Int
         let otpCodeLength: Int
+
+        var countryCode = "+1"
+        var phone = "1234567890"
     }
 }

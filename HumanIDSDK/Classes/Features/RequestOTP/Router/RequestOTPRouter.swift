@@ -1,6 +1,6 @@
 internal protocol RequestOTPRoutingLogic {
 
-    func pushLoginVC(with request: RequestOTP.Request)
+    func pushLoginVC(with viewModel: RequestOTP.ViewModel)
     func openTnc()
 }
 
@@ -12,12 +12,11 @@ internal class RequestOTPRouter: RequestOTPRoutingLogic {
         self.view = view
     }
 
-    func pushLoginVC(with request: RequestOTP.Request) {
+    func pushLoginVC(with viewModel: RequestOTP.ViewModel) {
         let loginVC = Injector.shared.resolver.resolve(LoginViewController.self)!
         loginVC.modalPresentationStyle = .overFullScreen
-        loginVC.countryCode = request.countryCode
-        loginVC.phoneNumber = request.phone
-        loginVC.delegate = self.view
+        loginVC.delegate = view
+        loginVC.viewModel = viewModel
 
         view?.present(loginVC, animated: true)
     }

@@ -22,7 +22,7 @@ internal class RequestOTPPresenter: RequestOTPInteractorOutput {
         output?.hideLoading()
     }
 
-    func success(with response: BaseResponse<RequestOTP.Response>) {
+    func success(with request: RequestOTP.Request, response: BaseResponse<RequestOTP.Response>) {
         guard
             let isSuccess = response.success,
             let message = response.message else {
@@ -44,7 +44,7 @@ internal class RequestOTPPresenter: RequestOTPInteractorOutput {
                 let nextResendDelay = config.nextResendDelay,
                 let otpCodeLength = config.otpCodeLength else { return }
 
-            let viewModel = RequestOTP.ViewModel(
+            var viewModel = RequestOTP.ViewModel(
                 requestId: requestId,
                 nextResendAt: nextResendAt,
                 failAttemptCount: failAttemptCount,
@@ -55,6 +55,9 @@ internal class RequestOTPPresenter: RequestOTPInteractorOutput {
                 nextResendDelay: nextResendDelay,
                 otpCodeLength: otpCodeLength
             )
+            viewModel.countryCode = request.countryCode
+            viewModel.phone = request.phone
+
             output?.success(with: viewModel)
         default:
             output?.error(with: message)
