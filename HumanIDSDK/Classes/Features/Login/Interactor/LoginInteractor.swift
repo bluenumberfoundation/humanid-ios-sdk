@@ -11,7 +11,7 @@ internal protocol LoginInteractorOutput {
     func showLoading()
     func hideLoading()
     func successLogin(with response: BaseResponse<Login.Response>)
-    func successRequestOtp(with response: BaseResponse<NetworkResponse>)
+    func successRequestOtp(with response: BaseResponse<RequestOTP.Response>)
     func errorLogin(with errorResponse: Error)
     func errorRequestOtp(with errorResponse: Error)
 }

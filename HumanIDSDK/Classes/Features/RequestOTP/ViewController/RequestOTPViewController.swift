@@ -176,7 +176,7 @@ extension RequestOTPViewController: RequestOTPPresenterOutput {
         setButtonAlpha(isValid: true)
     }
 
-    func success() {
+    func success(with viewModel: RequestOTP.ViewModel) {
         router?.pushLoginVC(with: self.request!)
     }
 

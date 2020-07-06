@@ -248,6 +248,10 @@ extension LoginViewController: LoginPresenterOutput {
         }
     }
 
+    func successRequestOtp(with viewModel: RequestOTP.ViewModel) {
+        // TODO: Not yet implemented
+    }
+
     func errorLogin(with message: String) {
         alertVC(with: message, completion: { _ in
             self.pinView.resetCode()

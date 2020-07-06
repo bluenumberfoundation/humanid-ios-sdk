@@ -3,6 +3,7 @@ internal protocol LoginPresenterOutput: class {
     func showLoading()
     func hideLoading()
     func successLogin(with viewModel: Login.ViewModel)
+    func successRequestOtp(with viewModel: RequestOTP.ViewModel)
     func errorLogin(with message: String)
     func errorRequestOtp(with message: String)
 }
@@ -43,7 +44,7 @@ internal class LoginPresenter: LoginInteractorOutput {
         }
     }
 
-    func successRequestOtp(with response: BaseResponse<NetworkResponse>) {
+    func successRequestOtp(with response: BaseResponse<RequestOTP.Response>) {
         guard
             let isSuccess = response.success,
             let message = response.message else {
@@ -51,10 +52,34 @@ internal class LoginPresenter: LoginInteractorOutput {
         }
 
         switch isSuccess {
-        case false:
-            output?.errorRequestOtp(with: message)
+        case true:
+            guard
+                let data = response.data,
+                let requestId = data.requestId,
+                let nextResendAt = data.nextResendAt,
+                let failAttemptCount = data.failAttemptCount,
+                let otpCount = data.otpCount,
+                let config = data.config,
+                let otpSessionLifetime = config.otpSessionLifetime,
+                let otpCountLimit = config.otpCountLimit,
+                let failAttemptLimit = config.failAttemptLimit,
+                let nextResendDelay = config.nextResendDelay,
+                let otpCodeLength = config.otpCodeLength else { return }
+
+            let viewModel = RequestOTP.ViewModel(
+                requestId: requestId,
+                nextResendAt: nextResendAt,
+                failAttemptCount: failAttemptCount,
+                otpCount: otpCount,
+                otpSessionLifetime: otpSessionLifetime,
+                otpCountLimit: otpCountLimit,
+                failAttemptLimit: failAttemptLimit,
+                nextResendDelay: nextResendDelay,
+                otpCodeLength: otpCodeLength
+            )
+            output?.successRequestOtp(with: viewModel)
         default:
-            break
+            output?.errorRequestOtp(with: message)
         }
     }
 

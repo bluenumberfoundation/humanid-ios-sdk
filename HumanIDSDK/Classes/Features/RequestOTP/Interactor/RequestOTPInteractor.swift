@@ -9,7 +9,7 @@ internal protocol RequestOTPInteractorOutput {
 
     func showLoading()
     func hideLoading()
-    func success(with response: BaseResponse<NetworkResponse>)
+    func success(with response: BaseResponse<RequestOTP.Response>)
     func error(with errorResponse: Error)
 }
 

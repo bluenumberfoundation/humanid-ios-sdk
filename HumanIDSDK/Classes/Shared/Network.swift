@@ -16,7 +16,7 @@ internal final class Network {
         self.decoder = JSONDecoder()
     }
 
-    func requestOtp(url: URL, header: BaseRequest, request: RequestOTP.Request) -> Observable<BaseResponse<NetworkResponse>> {
+    func requestOtp(url: URL, header: BaseRequest, request: RequestOTP.Request) -> Observable<BaseResponse<RequestOTP.Response>> {
         let requestBody = try! encoder.encode(request)
 
         var urlRequest = URLRequest(url: url)
@@ -32,8 +32,8 @@ internal final class Network {
             .responseJSON()
             .asObservable()
             .observeOn(scheduler)
-            .map({ (response) -> BaseResponse<NetworkResponse> in
-                return try self.decoder.decode(BaseResponse<NetworkResponse>.self, from: response.data!)
+            .map({ (response) -> BaseResponse<RequestOTP.Response> in
+                return try self.decoder.decode(BaseResponse<RequestOTP.Response>.self, from: response.data!)
             })
     }
 
