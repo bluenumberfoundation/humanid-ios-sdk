@@ -4,6 +4,7 @@ internal struct Login {
 
         let countryCode: String
         let phone: String
+        let deviceTypeId: Int
         let deviceId: String
         let verificationCode: String
     }

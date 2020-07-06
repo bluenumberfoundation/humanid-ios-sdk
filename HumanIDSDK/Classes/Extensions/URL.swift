@@ -19,8 +19,4 @@ internal extension URL {
     static var login: URL {
         return URL(string: "login", relativeTo: users)!
     }
-
-    static var revokeAccess: URL {
-        return URL(string: "revoke-access", relativeTo: users)!
-    }
 }
