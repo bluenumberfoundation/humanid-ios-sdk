@@ -20,9 +20,7 @@ internal class LoginViewController: UIViewController {
     var timer: Timer?
     var timerTap: UITapGestureRecognizer?
 
-    var countryCode = ""
-    var phoneNumber = ""
-    var seconds = 30
+    var seconds = -1
 
     var bottomSheetViewHeight: CGFloat = UIScreen.main.bounds.size.height * 0.40 {
         didSet {
@@ -34,10 +32,9 @@ internal class LoginViewController: UIViewController {
     var bottomSheetTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
 
     var delegate: LoginDelegate?
+    var viewModel: RequestOTP.ViewModel?
     var input: LoginInteractorInput?
     var router: LoginRoutingLogic?
-    var requestOtp: RequestOTP.Request?
-    var requestLogin: Login.Request?
 
     lazy var pinView: VKPinCodeView = {
         let pinView = VKPinCodeView()
@@ -70,7 +67,7 @@ internal class LoginViewController: UIViewController {
     }
 
     func configureViews() {
-        self.view.backgroundColor = .clear
+        view.backgroundColor = .clear
 
         bgView.alpha = 0.0
         containerView.layer.cornerRadius = 10
@@ -84,23 +81,25 @@ internal class LoginViewController: UIViewController {
         pinView.trailingAnchor.constraint(equalTo: pinContainerView.trailingAnchor, constant: -40).isActive = true
         pinView.centerYAnchor.constraint(equalTo: pinContainerView.centerYAnchor).isActive = true
 
-        verificationInfo.text = "We just sent a text to (+\(countryCode)) \(phoneNumber). We will not save or forward this number after the verification"
+        guard let viewModel = self.viewModel else { return }
+        verificationInfo.text = "We just sent a text to (+\(viewModel.countryCode)) \(viewModel.phone). We will not save or forward this number after the verification"
+        seconds = viewModel.nextResendDelay
 
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     func setupListener() {
-        let tncTap = UITapGestureRecognizer(target: self, action: #selector(self.viewDidShowTnc(_ :)))
+        let tncTap = UITapGestureRecognizer(target: self, action: #selector(viewDidShowTnc))
         humanIdTnc.isUserInteractionEnabled = true
         humanIdTnc.addGestureRecognizer(tncTap)
 
-        timerTap = UITapGestureRecognizer(target: self, action: #selector(self.viewDidResendCode(_:)))
+        timerTap = UITapGestureRecognizer(target: self, action: #selector(viewDidResendCode))
     }
 
     func setupTimer() {
         guard timer == nil else { return }
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
 
     @IBAction func dismissKeyboard(_ sender: Any) {
@@ -119,9 +118,9 @@ internal class LoginViewController: UIViewController {
             bottomSheetTouchPoint = touchPoint
         case .ended, .cancelled:
             if touchPoint.y - bottomSheetTouchPoint.y > 100 {
-                self.bgView.alpha = 0.0
-                self.view.layoutIfNeeded()
-                self.dismiss(animated: true)
+                bgView.alpha = 0.0
+                view.layoutIfNeeded()
+                dismiss(animated: true)
             } else {
                 UIView.animate(withDuration: 0.25, animations: {
                     self.containerView.frame = CGRect(
@@ -142,7 +141,9 @@ internal class LoginViewController: UIViewController {
     }
 
     @objc func viewDidResendCode(_ sender: UITapGestureRecognizer) {
-        seconds = 30
+        guard let viewModel = self.viewModel else { return }
+
+        seconds = viewModel.nextResendDelay
         setupTimer()
         pinView.resetCode()
 
@@ -150,8 +151,10 @@ internal class LoginViewController: UIViewController {
         let clientSecret = KeyChain.retrieves(key: .clientSecret) ?? ""
         let header = BaseRequest(clientId: clientId, clientSecret: clientSecret)
 
-        self.requestOtp = .init(countryCode: countryCode, phone: phoneNumber)
-        input?.requestOtp(with: header, request: requestOtp!)
+        input?.requestOtp(with: header, request: .init(
+            countryCode: viewModel.countryCode,
+            phone: viewModel.phone)
+        )
     }
 
     @objc func updateTimer() {
@@ -184,6 +187,8 @@ internal class LoginViewController: UIViewController {
     }
 
     private func login(verificationCode: String) {
+        guard let viewModel = self.viewModel else { return }
+
         invalidateTimer()
 
         let clientId = KeyChain.retrieves(key: .clientID) ?? ""
@@ -192,13 +197,12 @@ internal class LoginViewController: UIViewController {
 
         let deviceId = KeyChain.retrieves(key: .deviceID) ?? ""
 
-        self.requestLogin = .init(
-            countryCode: self.countryCode,
-            phone: self.phoneNumber,
+        input?.login(with: header, request: .init(
+            countryCode: viewModel.countryCode,
+            phone: viewModel.phone,
             deviceId: deviceId,
-            verificationCode: verificationCode
+            verificationCode: verificationCode)
         )
-        input?.login(with: header, request: self.requestLogin!)
     }
 
     private func invalidateTimer() {

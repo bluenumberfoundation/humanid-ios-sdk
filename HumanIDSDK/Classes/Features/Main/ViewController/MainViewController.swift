@@ -36,7 +36,7 @@ internal class MainViewController: UIViewController {
     }
 
     func configureViews() {
-        self.view.backgroundColor = .clear
+        view.backgroundColor = .clear
 
         bgView.alpha = 0.0
         fgView.layer.cornerRadius = 10
@@ -76,9 +76,9 @@ internal class MainViewController: UIViewController {
             }
         case .ended, .cancelled:
             if touchPoint.y - bottomSheetTouchPoint.y > 100 {
-                self.bgView.alpha = 0.0
-                self.view.layoutIfNeeded()
-                self.dismiss(animated: true)
+                bgView.alpha = 0.0
+                view.layoutIfNeeded()
+                dismiss(animated: true)
             } else {
                 UIView.animate(withDuration: 0.25, animations: {
                     self.fgView.frame = CGRect(

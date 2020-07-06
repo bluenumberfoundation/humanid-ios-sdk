@@ -23,7 +23,6 @@ internal class RequestOTPViewController: UIViewController {
     var delegate: RequestOTPDelegate?
     var input: RequestOTPInteractorInput?
     var router: RequestOTPRoutingLogic?
-    var request: RequestOTP.Request?
 
     lazy var phoneNumberTextField: FPNTextField = {
         let phoneNumberTextField = FPNTextField(frame: CGRect(x: 0, y: 0, width: phoneContainerView.bounds.width - 16, height: 30))
@@ -110,7 +109,7 @@ internal class RequestOTPViewController: UIViewController {
     }
 
     func setupListener() {
-        let tncTap = UITapGestureRecognizer(target: self, action: #selector(self.viewDidShowTnc(_ :)))
+        let tncTap = UITapGestureRecognizer(target: self, action: #selector(viewDidShowTnc))
         verifyTnc.isUserInteractionEnabled = true
         verifyTnc.addGestureRecognizer(tncTap)
     }
@@ -137,8 +136,10 @@ internal class RequestOTPViewController: UIViewController {
         let clientSecret = KeyChain.retrieves(key: .clientSecret) ?? ""
         let header = BaseRequest(clientId: clientId, clientSecret: clientSecret)
 
-        self.request = .init(countryCode: countryCode, phone: phone)
-        input?.requestOtp(with: header, request: request!)
+        input?.requestOtp(with: header, request: .init(
+            countryCode: countryCode,
+            phone: phone)
+        )
     }
 
     @IBAction func viewDidDismiss(_ sender: Any) {
@@ -177,7 +178,7 @@ extension RequestOTPViewController: RequestOTPPresenterOutput {
     }
 
     func success(with viewModel: RequestOTP.ViewModel) {
-        router?.pushLoginVC(with: self.request!)
+        router?.pushLoginVC(with: viewModel)
     }
 
     func error(with message: String) {
