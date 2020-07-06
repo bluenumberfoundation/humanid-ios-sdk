@@ -257,18 +257,18 @@ extension LoginViewController: LoginPresenterOutput {
     }
 
     func errorLogin(with message: String) {
-        alertVC(with: message, completion: { _ in
+        alertVC(with: message) { _ in
             self.pinView.resetCode()
             self.pinView.becomeFirstResponder()
             self.resetTimerLabel()
             self.containerViewBottom.constant = 50
-        })
+        }
     }
 
     func errorRequestOtp(with message: String) {
-        alertVC(with: message, completion: { _ in
-            self.invalidateTimer()
+        alertVC(with: message) { _ in
             self.resetTimerLabel()
-        })
+            self.invalidateTimer()
+        }
     }
 }

@@ -182,11 +182,11 @@ extension RequestOTPViewController: RequestOTPPresenterOutput {
     }
 
     func error(with message: String) {
-        alertVC(with: message, completion: { _ in
+        alertVC(with: message) { _ in
             self.phoneNumberTextField.becomeFirstResponder()
             self.phoneNumberTextField.text = ""
             self.setupFormValidation()
-        })
+        }
     }
 }
 
