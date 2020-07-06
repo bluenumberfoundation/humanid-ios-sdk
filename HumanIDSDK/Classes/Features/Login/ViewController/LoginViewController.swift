@@ -143,9 +143,8 @@ internal class LoginViewController: UIViewController {
     @objc func viewDidResendCode(_ sender: UITapGestureRecognizer) {
         guard let viewModel = self.viewModel else { return }
 
-        seconds = viewModel.nextResendDelay
-        setupTimer()
         pinView.resetCode()
+        view.endEditing(true)
 
         let clientId = KeyChain.retrieves(key: .clientID) ?? ""
         let clientSecret = KeyChain.retrieves(key: .clientSecret) ?? ""
@@ -216,6 +215,12 @@ internal class LoginViewController: UIViewController {
         timerLabel.addGestureRecognizer(timerTap!)
     }
 
+    private func resetView() {
+        pinView.resetCode()
+        pinView.becomeFirstResponder()
+        containerViewBottom.constant = 50
+    }
+
     private func showAnimation(isDismiss: Bool) {
         UIView.animate(withDuration: 0.25, animations: {
             self.bgView.alpha = isDismiss ? 0.0 : 0.3
@@ -253,22 +258,22 @@ extension LoginViewController: LoginPresenterOutput {
     }
 
     func successRequestOtp(with viewModel: RequestOTP.ViewModel) {
-        // TODO: Not yet implemented
+        seconds = viewModel.nextResendDelay
+        setupTimer()
     }
 
     func errorLogin(with message: String) {
         alertVC(with: message) { _ in
-            self.pinView.resetCode()
-            self.pinView.becomeFirstResponder()
             self.resetTimerLabel()
-            self.containerViewBottom.constant = 50
+            self.resetView()
         }
     }
 
     func errorRequestOtp(with message: String) {
         alertVC(with: message) { _ in
-            self.resetTimerLabel()
             self.invalidateTimer()
+            self.resetTimerLabel()
+            self.resetView()
         }
     }
 }

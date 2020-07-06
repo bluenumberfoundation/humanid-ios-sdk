@@ -26,6 +26,8 @@ internal struct RequestOTP {
 
     struct ViewModel {
 
+        let countryCode: String
+        let phone: String
         let requestId: String
         let nextResendAt: Int64
         let failAttemptCount: Int
@@ -35,8 +37,5 @@ internal struct RequestOTP {
         let failAttemptLimit: Int
         let nextResendDelay: Int
         let otpCodeLength: Int
-
-        var countryCode = "+1"
-        var phone = "1234567890"
     }
 }

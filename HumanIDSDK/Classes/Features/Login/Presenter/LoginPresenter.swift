@@ -44,7 +44,7 @@ internal class LoginPresenter: LoginInteractorOutput {
         }
     }
 
-    func successRequestOtp(with response: BaseResponse<RequestOTP.Response>) {
+    func successRequestOtp(with request: RequestOTP.Request, response: BaseResponse<RequestOTP.Response>) {
         guard
             let isSuccess = response.success,
             let message = response.message else {
@@ -67,6 +67,8 @@ internal class LoginPresenter: LoginInteractorOutput {
                 let otpCodeLength = config.otpCodeLength else { return }
 
             let viewModel = RequestOTP.ViewModel(
+                countryCode: request.countryCode,
+                phone: request.phone,
                 requestId: requestId,
                 nextResendAt: nextResendAt,
                 failAttemptCount: failAttemptCount,

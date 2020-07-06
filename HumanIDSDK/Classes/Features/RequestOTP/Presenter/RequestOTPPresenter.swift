@@ -44,7 +44,9 @@ internal class RequestOTPPresenter: RequestOTPInteractorOutput {
                 let nextResendDelay = config.nextResendDelay,
                 let otpCodeLength = config.otpCodeLength else { return }
 
-            var viewModel = RequestOTP.ViewModel(
+            let viewModel = RequestOTP.ViewModel(
+                countryCode: request.countryCode,
+                phone: request.phone,
                 requestId: requestId,
                 nextResendAt: nextResendAt,
                 failAttemptCount: failAttemptCount,
@@ -55,9 +57,6 @@ internal class RequestOTPPresenter: RequestOTPInteractorOutput {
                 nextResendDelay: nextResendDelay,
                 otpCodeLength: otpCodeLength
             )
-            viewModel.countryCode = request.countryCode
-            viewModel.phone = request.phone
-
             output?.success(with: viewModel)
         default:
             output?.error(with: message)
