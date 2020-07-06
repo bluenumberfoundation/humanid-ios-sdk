@@ -1,7 +1,7 @@
 internal extension URL {
 
     static var base: URL {
-        return URL(string: "https://core.human-id.org/v0.0.2/")!
+        return URL(string: "https://core.human-id.org/v0.0.3/")!
     }
 
     static var tnc: URL {
@@ -18,5 +18,9 @@ internal extension URL {
 
     static var login: URL {
         return URL(string: "login", relativeTo: users)!
+    }
+
+    static var revokeAccess: URL {
+        return URL(string: "revoke-access", relativeTo: users)!
     }
 }
