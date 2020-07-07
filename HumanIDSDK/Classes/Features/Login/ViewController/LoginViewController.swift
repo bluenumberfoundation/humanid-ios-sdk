@@ -17,10 +17,10 @@ internal class LoginViewController: UIViewController {
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var containerViewBottom: NSLayoutConstraint!
 
+    var viewModel: RequestOTP.ViewModel!
+
     var timer: Timer?
     var timerTap: UITapGestureRecognizer?
-
-    var seconds = -1
 
     var bottomSheetViewHeight: CGFloat = UIScreen.main.bounds.size.height * 0.40 {
         didSet {
@@ -32,7 +32,6 @@ internal class LoginViewController: UIViewController {
     var bottomSheetTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
 
     var delegate: LoginDelegate?
-    var viewModel: RequestOTP.ViewModel?
     var input: LoginInteractorInput?
     var router: LoginRoutingLogic?
 
@@ -48,6 +47,10 @@ internal class LoginViewController: UIViewController {
         }
 
         return pinView
+    }()
+
+    lazy var seconds: Int = {
+        return viewModel.nextResendDelay
     }()
 
     convenience init() {
@@ -81,9 +84,7 @@ internal class LoginViewController: UIViewController {
         pinView.trailingAnchor.constraint(equalTo: pinContainerView.trailingAnchor, constant: -40).isActive = true
         pinView.centerYAnchor.constraint(equalTo: pinContainerView.centerYAnchor).isActive = true
 
-        guard let viewModel = self.viewModel else { return }
         verificationInfo.text = "We just sent a text to (+\(viewModel.countryCode)) \(viewModel.phone). We will not save or forward this number after the verification"
-        seconds = viewModel.nextResendDelay
 
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -122,14 +123,14 @@ internal class LoginViewController: UIViewController {
                 view.layoutIfNeeded()
                 dismiss(animated: true)
             } else {
-                UIView.animate(withDuration: 0.25, animations: {
+                UIView.animate(withDuration: 0.25) {
                     self.containerView.frame = CGRect(
                         x: 0,
                         y: touchPoint.y,
                         width: self.containerView.frame.size.width,
                         height: self.bottomSheetViewHeight - self.containerView.frame.size.height
                     )
-                })
+                }
             }
         default:
             break
@@ -141,8 +142,6 @@ internal class LoginViewController: UIViewController {
     }
 
     @objc func viewDidResendCode(_ sender: UITapGestureRecognizer) {
-        guard let viewModel = self.viewModel else { return }
-
         pinView.resetCode()
         view.endEditing(true)
 
@@ -186,8 +185,6 @@ internal class LoginViewController: UIViewController {
     }
 
     private func login(verificationCode: String) {
-        guard let viewModel = self.viewModel else { return }
-
         invalidateTimer()
 
         let clientId = KeyChain.retrieves(key: .clientID) ?? ""

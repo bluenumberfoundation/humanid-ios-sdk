@@ -80,14 +80,14 @@ internal class MainViewController: UIViewController {
                 view.layoutIfNeeded()
                 dismiss(animated: true)
             } else {
-                UIView.animate(withDuration: 0.25, animations: {
+                UIView.animate(withDuration: 0.25) {
                     self.fgView.frame = CGRect(
                         x: 0,
                         y: touchPoint.y,
                         width: self.fgView.frame.size.width,
                         height: self.bottomSheetViewHeight - self.fgView.frame.size.height
                     )
-                })
+                }
             }
         default:
             break

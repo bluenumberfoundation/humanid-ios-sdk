@@ -28,6 +28,7 @@ extension LoginViewController: RequestOTPDelegate {
         Cache.shared.setToken(with: token)
 
         let rootVC = HomeViewController()
-        window.rootViewController = UINavigationController(rootViewController: rootVC)
+        let navVC = UINavigationController(rootViewController: rootVC)
+        window.rootViewController = navVC
     }
 }

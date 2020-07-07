@@ -159,6 +159,24 @@ internal class RequestOTPViewController: UIViewController {
     }
 }
 
+// MARK: - FlagPhoneNumber Delegate
+extension RequestOTPViewController: FPNTextFieldDelegate {
+
+    func fpnDidSelectCountry(name: String, dialCode: String, code: String) {}
+    func fpnDidValidatePhoneNumber(textField: FPNTextField, isValid: Bool) {}
+
+    func fpnDisplayCountryList() {
+        let navVC = UINavigationController(rootViewController: listController)
+        listController.title = "Countries"
+
+        present(navVC, animated: true) {
+            DispatchQueue.main.async {
+                self.listController.searchController.searchBar.becomeFirstResponder()
+            }
+        }
+    }
+}
+
 // MARK: - Presenter Delegate
 extension RequestOTPViewController: RequestOTPPresenterOutput {
 
@@ -186,24 +204,6 @@ extension RequestOTPViewController: RequestOTPPresenterOutput {
             self.phoneNumberTextField.becomeFirstResponder()
             self.phoneNumberTextField.text = ""
             self.setupFormValidation()
-        }
-    }
-}
-
-// MARK: - FlagPhoneNumber Delegate
-extension RequestOTPViewController: FPNTextFieldDelegate {
-
-    func fpnDidSelectCountry(name: String, dialCode: String, code: String) {}
-    func fpnDidValidatePhoneNumber(textField: FPNTextField, isValid: Bool) {}
-
-    func fpnDisplayCountryList() {
-        let navVC = UINavigationController(rootViewController: listController)
-        listController.title = "Countries"
-
-        present(navVC, animated: true) {
-            DispatchQueue.main.async {
-                self.listController.searchController.searchBar.becomeFirstResponder()
-            }
         }
     }
 }

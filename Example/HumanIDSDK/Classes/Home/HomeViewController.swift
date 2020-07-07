@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
         Cache.shared.clear()
 
         let rootVC = LoginViewController()
-        window.rootViewController = UINavigationController(rootViewController: rootVC)
+        let navVC = UINavigationController(rootViewController: rootVC)
+        window.rootViewController = navVC
     }
 }

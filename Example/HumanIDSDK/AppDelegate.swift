@@ -13,18 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         HumanIDSDK.shared.configure(clientID: clientID, clientSecret: clientSecret)
 
         let rootVC = getRootVC()
+        let navVC = UINavigationController(rootViewController: rootVC)
+
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: rootVC)
+        window?.rootViewController = navVC
         window?.makeKeyAndVisible()
 
         return true
     }
 
     private func getRootVC() -> UIViewController {
-        guard let _ = Cache.shared.getToken() else {
-            return LoginViewController()
-        }
-
-        return HomeViewController()
+        return Cache.shared.getToken() != nil ? HomeViewController() : LoginViewController()
     }
 }

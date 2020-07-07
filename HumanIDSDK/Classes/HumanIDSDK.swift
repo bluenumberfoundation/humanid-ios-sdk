@@ -21,9 +21,9 @@ open class HumanIDSDK {
         // MARK: - Open humanID main page
         let mainVC = Injector.shared.resolver.resolve(MainViewController.self)!
         mainVC.modalPresentationStyle = .overFullScreen
+        mainVC.router?.parentVC = viewController
         mainVC.clientName = appName
         mainVC.clientLogo = appImage
-        mainVC.router?.parentVC = viewController
 
         viewController.present(mainVC, animated: true)
     }
