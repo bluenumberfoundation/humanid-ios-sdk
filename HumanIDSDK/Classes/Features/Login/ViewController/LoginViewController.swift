@@ -196,7 +196,7 @@ internal class LoginViewController: UIViewController {
         input?.login(with: header, request: .init(
             countryCode: viewModel.countryCode,
             phone: viewModel.phone,
-            deviceTypeId: 2,
+            deviceTypeId: .ios,
             deviceId: deviceId,
             verificationCode: verificationCode)
         )
