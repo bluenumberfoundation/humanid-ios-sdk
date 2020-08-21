@@ -40,7 +40,7 @@ internal final class LoginConfigurator: Assembly {
         container.register(LoginViewController.self) { (r) in
             let controller = LoginViewController()
             let input = r.resolve(LoginInteractorInput.self, argument: controller as LoginPresenterOutput)!
-            let router = r.resolve(LoginRouterProtocol.self, argument: controller)!
+            let router = r.resolve(LoginRouterProtocol.self)!
 
             controller.input = input
             controller.router = router

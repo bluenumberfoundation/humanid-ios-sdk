@@ -77,7 +77,7 @@ import HumanIDSDK
 class YourViewController: UIViewController {
 
   @IBAction func yourLoginAction(_ sender: Any) {
-     HumanIDSDK.shared.requestOtp(view: self, name: "YOUR_APPLICATION_NAME", image: "YOUR_APPLICATION_LOGO")
+     HumanIDSDK.shared.requestOtp(from: self, name: "YOUR_APPLICATION_NAME", image: "YOUR_APPLICATION_LOGO")
   }
 }
 
