@@ -1,6 +1,6 @@
 import Foundation
 
-class Cache {
+final class Cache {
 
     static let shared = Cache()
 

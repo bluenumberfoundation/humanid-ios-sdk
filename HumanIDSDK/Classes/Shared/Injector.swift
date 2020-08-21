@@ -1,10 +1,10 @@
 import Swinject
 
-internal class Injector {
+internal final class Injector {
 
     static let shared = Injector.resolved()
 
-    private static func resolved() -> Assembler {
+    private static func resolved() -> Resolver {
         let assembler = Assembler()
         assembler.apply(assemblies: [
             Configurator(),
@@ -13,6 +13,6 @@ internal class Injector {
             LoginConfigurator()
         ])
 
-        return assembler
+        return assembler.resolver
     }
 }

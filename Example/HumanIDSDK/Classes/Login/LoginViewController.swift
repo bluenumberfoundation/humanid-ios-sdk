@@ -1,7 +1,7 @@
 import UIKit
 import HumanIDSDK
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
 
     @IBOutlet weak var btnLogin: UIButton!
 
@@ -9,7 +9,6 @@ class LoginViewController: UIViewController {
     private let applicationLogo = "Logo"
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         title = displayName
 
         btnLogin.layer.cornerRadius = 8
@@ -17,7 +16,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func didLogin(_ sender: Any) {
-        HumanIDSDK.shared.requestOtp(view: self, name: displayName, image: applicationLogo)
+        HumanIDSDK.shared.requestOtp(from: self, name: displayName, image: applicationLogo)
     }
 }
 

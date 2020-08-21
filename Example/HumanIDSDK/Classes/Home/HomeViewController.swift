@@ -1,11 +1,10 @@
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
 
     @IBOutlet weak var btnLogout: UIButton!
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         title = "Home"
 
         btnLogout.layer.cornerRadius = 8

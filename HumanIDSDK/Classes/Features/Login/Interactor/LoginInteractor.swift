@@ -1,60 +1,62 @@
 import RxSwift
 
-internal protocol LoginInteractorInput {
+internal protocol LoginInteractorInput: AnyObject {
 
-    func login(with header: BaseRequest, request: Login.Request)
-    func requestOtp(with header: BaseRequest, request: RequestOTP.Request)
+    var disposeBag: DisposeBag? { get }
+
+    func dispose()
+    func login(with header: BaseRequest, and request: Login.Request)
+    func requestOtp(with header: BaseRequest, and request: RequestOTP.Request)
 }
 
-internal protocol LoginInteractorOutput {
+internal protocol LoginInteractorOutput: AnyObject {
 
     func showLoading()
     func hideLoading()
     func successLogin(with response: BaseResponse<Login.Response>)
-    func successRequestOtp(with request: RequestOTP.Request, response: BaseResponse<RequestOTP.Response>)
-    func errorLogin(with errorResponse: Error)
-    func errorRequestOtp(with errorResponse: Error)
+    func successRequestOtp(with request: RequestOTP.Request, and response: BaseResponse<RequestOTP.Response>)
+    func errorLogin(with response: Error)
+    func errorRequestOtp(with response: Error)
 }
 
-internal class LoginInteractor: LoginInteractorInput {
+internal final class LoginInteractor: LoginInteractorInput {
 
-    var output: LoginInteractorOutput?
-    var worker: LoginWorkerDelegate?
+    var output: LoginInteractorOutput!
+    var worker: LoginWorkerProtocol!
 
-    private let disposeBag = DisposeBag()
+    var disposeBag: DisposeBag?
 
-    init(output: LoginInteractorOutput, worker: LoginWorkerDelegate) {
-        self.output = output
-        self.worker = worker
+    func dispose() {
+        disposeBag = nil
     }
 
-    func login(with header: BaseRequest, request: Login.Request) {
-        output?.showLoading()
-        worker?.login(with: header, request: request)
+    func login(with header: BaseRequest, and request: Login.Request) {
+        output.showLoading()
+        worker.login(with: header, and: request)
             .observeOn(MainScheduler.instance)
             .subscribe(
                 onNext: {[weak self] (response) in
-                    self?.output?.hideLoading()
-                    self?.output?.successLogin(with: response)
+                    self?.output.hideLoading()
+                    self?.output.successLogin(with: response)
                 },
                 onError: {[weak self] (error) in
-                    self?.output?.hideLoading()
-                    self?.output?.errorLogin(with: error)
-            }).disposed(by: disposeBag)
+                    self?.output.hideLoading()
+                    self?.output.errorLogin(with: error)
+            }).disposed(by: disposeBag!)
     }
 
-    func requestOtp(with header: BaseRequest, request: RequestOTP.Request) {
-        output?.showLoading()
-        worker?.requestOtp(with: header, request: request)
+    func requestOtp(with header: BaseRequest, and request: RequestOTP.Request) {
+        output.showLoading()
+        worker.requestOtp(with: header, and: request)
             .observeOn(MainScheduler.instance)
             .subscribe(
                 onNext: {[weak self] (response) in
-                    self?.output?.hideLoading()
-                    self?.output?.successRequestOtp(with: request, response: response)
+                    self?.output.hideLoading()
+                    self?.output.successRequestOtp(with: request, and: response)
                 },
                 onError: {[weak self] (error) in
-                    self?.output?.hideLoading()
-                    self?.output?.errorRequestOtp(with: error)
-            }).disposed(by: disposeBag)
+                    self?.output.hideLoading()
+                    self?.output.errorRequestOtp(with: error)
+            }).disposed(by: disposeBag!)
     }
 }

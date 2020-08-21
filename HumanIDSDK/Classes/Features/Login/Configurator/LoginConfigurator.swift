@@ -1,37 +1,51 @@
+import RxSwift
 import Swinject
 
-internal class LoginConfigurator: Assembly {
+internal final class LoginConfigurator: Assembly {
 
     func assemble(container: Container) {
-        container.register(LoginInteractorOutput.self) { (r, output: LoginPresenterOutput) in
-            return LoginPresenter(output: output)
+        container.register(LoginWorkerProtocol.self) { (r) in
+            let datasource = r.resolve(Network.self)!
+            let worker = LoginWorker()
+
+            worker.datasource = datasource
+
+            return worker
         }
 
-        container.register(LoginWorkerDelegate.self) { (r) in
-            let datasource = r.resolve(Network.self)!
-            return LoginWorker(datasource: datasource)
+        container.register(LoginInteractorOutput.self) { (r, output: LoginPresenterOutput) in
+            let presenter = LoginPresenter()
+            presenter.output = output
+
+            return presenter
         }
 
         container.register(LoginInteractorInput.self) { (r, output: LoginPresenterOutput) in
             let output = r.resolve(LoginInteractorOutput.self, argument: output)!
-            let worker = r.resolve(LoginWorkerDelegate.self)!
+            let worker = r.resolve(LoginWorkerProtocol.self)!
+            let interactor = LoginInteractor()
 
-            return LoginInteractor(output: output, worker: worker)
+            interactor.output = output
+            interactor.worker = worker
+
+            interactor.disposeBag = DisposeBag()
+
+            return interactor
         }
 
-        container.register(LoginRoutingLogic.self) { (r, view: LoginViewController) in
-            return LoginRouter(view: view)
+        container.register(LoginRouterProtocol.self) { _ in
+            return LoginRouter()
         }
 
         container.register(LoginViewController.self) { (r) in
-            let view = LoginViewController()
-            let input = r.resolve(LoginInteractorInput.self, argument: view as LoginPresenterOutput)!
-            let router = r.resolve(LoginRoutingLogic.self, argument: view)!
+            let controller = LoginViewController()
+            let input = r.resolve(LoginInteractorInput.self, argument: controller as LoginPresenterOutput)!
+            let router = r.resolve(LoginRouterProtocol.self, argument: controller)!
 
-            view.input = input
-            view.router = router
+            controller.input = input
+            controller.router = router
 
-            return view
+            return controller
         }
     }
 }

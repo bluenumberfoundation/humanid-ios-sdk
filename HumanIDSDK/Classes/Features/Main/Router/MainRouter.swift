@@ -1,32 +1,25 @@
-internal protocol MainRoutingLogic {
+internal protocol MainRouterProtocol: AnyObject {
 
-    var parentVC: UIViewController? { get set }
-
-    func pushRequestOtpVC(with appName: String)
+    func goToRequestOtp(with appName: String, from target: UIViewController)
     func openTnc()
 }
 
-internal class MainRouter: MainRoutingLogic {
+internal final class MainRouter: MainRouterProtocol {
 
-    weak var parentVC: UIViewController?
-    weak var view: MainViewController?
+    weak var controller: MainViewController?
 
-    init(view: MainViewController) {
-        self.view = view
-    }
-
-    func pushRequestOtpVC(with appName: String) {
-        let requestOtpVC = Injector.shared.resolver.resolve(RequestOTPViewController.self)!
-        requestOtpVC.modalPresentationStyle = .overCurrentContext
-        requestOtpVC.clientName = appName
-        requestOtpVC.delegate = parentVC as? RequestOTPDelegate
+    func goToRequestOtp(with appName: String, from target: UIViewController) {
+        let controller = Injector.shared.resolve(RequestOTPViewController.self)!
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.delegate = target as? RequestOTPDelegate
+        controller.clientName = appName
 
         UIView.animate(withDuration: 0.25, animations: {
-            self.view?.bgView.alpha = 0.0
-            self.view?.view.layoutIfNeeded()
+            self.controller?.bgView.alpha = 0.0
+            self.controller?.view.layoutIfNeeded()
         }) { (_) in
-            self.view?.dismiss(animated: true) {
-                self.parentVC?.present(requestOtpVC, animated: true)
+            self.controller?.dismiss(animated: true) {
+                target.present(controller, animated: true)
             }
         }
     }

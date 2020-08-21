@@ -1,6 +1,6 @@
-internal class KeyChain {
+internal final class KeyChain {
 
-    internal class func isStoreSuccess(key: String, value: String) -> Bool {
+    internal final class func isStoreSuccess(key: String, value: String) -> Bool {
 
         if let data = value.data(using: .utf8) {
             return isStoreSuccess(key: key, data: data)
@@ -9,7 +9,7 @@ internal class KeyChain {
         }
     }
 
-    internal class func retrieves(key: String) -> String? {
+    internal final class func retrieves(key: String) -> String? {
 
         if let data = retrieve(key: key) {
             return String(data: data, encoding: .utf8)
@@ -18,7 +18,7 @@ internal class KeyChain {
         }
     }
 
-    private class func isStoreSuccess(key: String, data: Data) -> Bool {
+    private final class func isStoreSuccess(key: String, data: Data) -> Bool {
 
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
@@ -34,7 +34,7 @@ internal class KeyChain {
         }
     }
 
-    private class func retrieve(key: String) -> Data? {
+    private final class func retrieve(key: String) -> Data? {
 
         let query = [
             kSecClass as String       : kSecClassGenericPassword,

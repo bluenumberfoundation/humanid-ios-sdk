@@ -1,4 +1,4 @@
-internal protocol RequestOTPPresenterOutput: class {
+internal protocol RequestOTPPresenterOutput: AnyObject {
 
     func showLoading()
     func hideLoading()
@@ -6,23 +6,19 @@ internal protocol RequestOTPPresenterOutput: class {
     func error(with message: String)
 }
 
-internal class RequestOTPPresenter: RequestOTPInteractorOutput {
+internal final class RequestOTPPresenter: RequestOTPInteractorOutput {
 
-    weak var output: RequestOTPPresenterOutput?
-
-    init(output: RequestOTPPresenterOutput) {
-        self.output = output
-    }
+    var output: RequestOTPPresenterOutput!
 
     func showLoading() {
-        output?.showLoading()
+        output.showLoading()
     }
 
     func hideLoading() {
-        output?.hideLoading()
+        output.hideLoading()
     }
 
-    func success(with request: RequestOTP.Request, response: BaseResponse<RequestOTP.Response>) {
+    func success(with request: RequestOTP.Request, and response: BaseResponse<RequestOTP.Response>) {
         guard
             let isSuccess = response.success,
             let message = response.message else {
@@ -57,13 +53,13 @@ internal class RequestOTPPresenter: RequestOTPInteractorOutput {
                 nextResendDelay: nextResendDelay,
                 otpCodeLength: otpCodeLength
             )
-            output?.success(with: viewModel)
+            output.success(with: viewModel)
         default:
-            output?.error(with: message)
+            output.error(with: message)
         }
     }
 
-    func error(with errorResponse: Error) {
-        output?.error(with: errorResponse.localizedDescription)
+    func error(with response: Error) {
+        output.error(with: response.localizedDescription)
     }
 }

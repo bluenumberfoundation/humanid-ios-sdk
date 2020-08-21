@@ -17,14 +17,14 @@ open class HumanIDSDK {
         }
     }
 
-    open func requestOtp(view viewController: UIViewController, name appName: String, image appImage: String) {
+    open func requestOtp(from target: UIViewController, name appName: String, image appImage: String) {
         // MARK: - Open humanID main page
-        let mainVC = Injector.shared.resolver.resolve(MainViewController.self)!
-        mainVC.modalPresentationStyle = .overFullScreen
-        mainVC.router?.parentVC = viewController
-        mainVC.clientName = appName
-        mainVC.clientLogo = appImage
+        let controller = Injector.shared.resolve(MainViewController.self)!
+        controller.modalPresentationStyle = .overFullScreen
+        controller.root = target
+        controller.clientName = appName
+        controller.clientLogo = appImage
 
-        viewController.present(mainVC, animated: true)
+        target.present(controller, animated: true)
     }
 }

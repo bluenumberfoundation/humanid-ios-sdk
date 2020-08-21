@@ -1,42 +1,44 @@
 import RxSwift
 
-internal protocol RequestOTPInteractorInput {
+internal protocol RequestOTPInteractorInput: AnyObject {
 
-    func requestOtp(with header: BaseRequest, request: RequestOTP.Request)
+    var disposeBag: DisposeBag? { get }
+
+    func dispose()
+    func requestOtp(with header: BaseRequest, and request: RequestOTP.Request)
 }
 
-internal protocol RequestOTPInteractorOutput {
+internal protocol RequestOTPInteractorOutput: AnyObject {
 
     func showLoading()
     func hideLoading()
-    func success(with request: RequestOTP.Request, response: BaseResponse<RequestOTP.Response>)
-    func error(with errorResponse: Error)
+    func success(with request: RequestOTP.Request, and response: BaseResponse<RequestOTP.Response>)
+    func error(with response: Error)
 }
 
-internal class RequestOTPInteractor: RequestOTPInteractorInput {
+internal final class RequestOTPInteractor: RequestOTPInteractorInput {
 
-    var output: RequestOTPInteractorOutput?
-    var worker: RequestOTPWorkerDelegate?
+    var output: RequestOTPInteractorOutput!
+    var worker: RequestOTPWorkerProtocol!
 
-    private let disposeBag = DisposeBag()
+    var disposeBag: DisposeBag?
 
-    init(output: RequestOTPInteractorOutput, worker: RequestOTPWorkerDelegate) {
-        self.output = output
-        self.worker = worker
+    func dispose() {
+        disposeBag = nil
     }
 
-    func requestOtp(with header: BaseRequest, request: RequestOTP.Request) {
-        output?.showLoading()
-        worker?.requestOtp(with: header, request: request)
+    func requestOtp(with header: BaseRequest, and request: RequestOTP.Request) {
+        output.showLoading()
+        worker.requestOtp(with: header, and: request)
             .observeOn(MainScheduler.instance)
             .subscribe(
                 onNext: {[weak self] (response) in
-                    self?.output?.hideLoading()
-                    self?.output?.success(with: request, response: response)
+                    self?.output.hideLoading()
+                    self?.output.success(with: request, and: response)
                 },
                 onError: {[weak self] (error) in
-                    self?.output?.hideLoading()
-                    self?.output?.error(with: error)
-            }).disposed(by: disposeBag)
+                    self?.output.hideLoading()
+                    self?.output.error(with: error)
+            }).disposed(by: disposeBag!)
     }
 }

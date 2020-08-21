@@ -1,24 +1,20 @@
-internal protocol RequestOTPRoutingLogic {
+internal protocol RequestOTPRouterProtocol: AnyObject {
 
-    func pushLoginVC(with viewModel: RequestOTP.ViewModel)
+    func goToLogin(with viewModel: RequestOTP.ViewModel)
     func openTnc()
 }
 
-internal class RequestOTPRouter: RequestOTPRoutingLogic {
+internal final class RequestOTPRouter: RequestOTPRouterProtocol {
 
-    weak var view: RequestOTPViewController?
+    weak var controller: RequestOTPViewController?
 
-    init(view: RequestOTPViewController) {
-        self.view = view
-    }
+    func goToLogin(with viewModel: RequestOTP.ViewModel) {
+        let controller = Injector.shared.resolve(LoginViewController.self)!
+        controller.modalPresentationStyle = .overFullScreen
+        controller.delegate = self.controller
+        controller.viewModel = viewModel
 
-    func pushLoginVC(with viewModel: RequestOTP.ViewModel) {
-        let loginVC = Injector.shared.resolver.resolve(LoginViewController.self)!
-        loginVC.modalPresentationStyle = .overFullScreen
-        loginVC.delegate = view
-        loginVC.viewModel = viewModel
-
-        view?.present(loginVC, animated: true)
+        self.controller?.present(controller, animated: true)
     }
 
     func openTnc() {

@@ -1,4 +1,4 @@
-internal protocol LoginPresenterOutput: class {
+internal protocol LoginPresenterOutput: AnyObject {
 
     func showLoading()
     func hideLoading()
@@ -8,20 +8,16 @@ internal protocol LoginPresenterOutput: class {
     func errorRequestOtp(with message: String)
 }
 
-internal class LoginPresenter: LoginInteractorOutput {
+internal final class LoginPresenter: LoginInteractorOutput {
 
-    weak var output: LoginPresenterOutput?
-
-    init(output: LoginPresenterOutput) {
-        self.output = output
-    }
+    var output: LoginPresenterOutput!
 
     func showLoading() {
-        output?.showLoading()
+        output.showLoading()
     }
 
     func hideLoading() {
-        output?.hideLoading()
+        output.hideLoading()
     }
 
     func successLogin(with response: BaseResponse<Login.Response>) {
@@ -38,13 +34,13 @@ internal class LoginPresenter: LoginInteractorOutput {
                 let token = data.exchangeToken else { return }
 
             let viewModel = Login.ViewModel(token: token)
-            output?.successLogin(with: viewModel)
+            output.successLogin(with: viewModel)
         default:
-            output?.errorLogin(with: message)
+            output.errorLogin(with: message)
         }
     }
 
-    func successRequestOtp(with request: RequestOTP.Request, response: BaseResponse<RequestOTP.Response>) {
+    func successRequestOtp(with request: RequestOTP.Request, and response: BaseResponse<RequestOTP.Response>) {
         guard
             let isSuccess = response.success,
             let message = response.message else {
@@ -79,17 +75,17 @@ internal class LoginPresenter: LoginInteractorOutput {
                 nextResendDelay: nextResendDelay,
                 otpCodeLength: otpCodeLength
             )
-            output?.successRequestOtp(with: viewModel)
+            output.successRequestOtp(with: viewModel)
         default:
-            output?.errorRequestOtp(with: message)
+            output.errorRequestOtp(with: message)
         }
     }
 
-    func errorLogin(with errorResponse: Error) {
-        output?.errorLogin(with: errorResponse.localizedDescription)
+    func errorLogin(with response: Error) {
+        output.errorLogin(with: response.localizedDescription)
     }
 
-    func errorRequestOtp(with errorResponse: Error) {
-        output?.errorRequestOtp(with: errorResponse.localizedDescription)
+    func errorRequestOtp(with response: Error) {
+        output.errorRequestOtp(with: response.localizedDescription)
     }
 }

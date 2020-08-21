@@ -1,4 +1,4 @@
-internal class MainViewController: UIViewController {
+internal final class MainViewController: UIViewController {
 
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var fgView: UIView!
@@ -10,6 +10,9 @@ internal class MainViewController: UIViewController {
     var clientLogo = ""
     var clientName = ""
 
+    var root: UIViewController!
+    var router: MainRouterProtocol!
+
     var bottomSheetViewHeight: CGFloat = UIScreen.main.bounds.size.height * 0.40 {
         didSet {
             fgViewHeight.constant = bottomSheetViewHeight
@@ -19,19 +22,15 @@ internal class MainViewController: UIViewController {
 
     var bottomSheetTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
 
-    var router: MainRoutingLogic?
-
     convenience init() {
         self.init(nibName: "MainViewController", bundle: Bundle.humanID)
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         configureViews()
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         showAnimation(isDismiss: false)
     }
 
@@ -48,11 +47,11 @@ internal class MainViewController: UIViewController {
     }
 
     @IBAction func goToRequestOTP(_ sender: Any) {
-        router?.pushRequestOtpVC(with: clientName)
+        router.goToRequestOtp(with: clientName, from: root)
     }
 
     @IBAction func showTnc(_ sender: Any) {
-        router?.openTnc()
+        router.openTnc()
     }
 
     @IBAction func dismiss(_ sender: UITapGestureRecognizer) {

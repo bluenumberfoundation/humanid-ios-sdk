@@ -2,12 +2,12 @@ import FlagPhoneNumber
 import RxSwift
 import RxCocoa
 
-public protocol RequestOTPDelegate {
+public protocol RequestOTPDelegate: AnyObject {
 
     func login(with token: String)
 }
 
-internal class RequestOTPViewController: UIViewController {
+internal final class RequestOTPViewController: UIViewController {
 
     @IBOutlet weak var phoneContainerView: UIView!
     @IBOutlet weak var enterButton: UIButton!
@@ -20,9 +20,10 @@ internal class RequestOTPViewController: UIViewController {
 
     var clientName = ""
 
+    var input: RequestOTPInteractorInput!
+    var router: RequestOTPRouterProtocol!
+
     var delegate: RequestOTPDelegate?
-    var input: RequestOTPInteractorInput?
-    var router: RequestOTPRoutingLogic?
 
     lazy var phoneNumberTextField: FPNTextField = {
         let phoneNumberTextField = FPNTextField(frame: CGRect(x: 0, y: 0, width: phoneContainerView.bounds.width - 16, height: 30))
@@ -39,14 +40,11 @@ internal class RequestOTPViewController: UIViewController {
         return phoneNumberTextField
     }()
 
-    private let disposeBag = DisposeBag()
-
     convenience init() {
         self.init(nibName: "RequestOTPViewController", bundle: Bundle.humanID)
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         configureViews()
         setupListener()
         setupFormValidation()
@@ -54,6 +52,10 @@ internal class RequestOTPViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        input.dispose()
     }
 
     func configureViews() {
@@ -124,7 +126,7 @@ internal class RequestOTPViewController: UIViewController {
         }
         .share(replay: 1)
         .distinctUntilChanged()
-        phoneValid.bind(to: enterButton.rx.isEnabled).disposed(by: disposeBag)
+        phoneValid.bind(to: enterButton.rx.isEnabled).disposed(by: input.disposeBag!)
     }
 
     @IBAction func showOTPModal(_ sender: Any) {
@@ -136,7 +138,7 @@ internal class RequestOTPViewController: UIViewController {
         let clientSecret = KeyChain.retrieves(key: .clientSecret) ?? ""
         let header = BaseRequest(clientId: clientId, clientSecret: clientSecret)
 
-        input?.requestOtp(with: header, request: .init(
+        input.requestOtp(with: header, and: .init(
             countryCode: countryCode,
             phone: phone)
         )
@@ -147,7 +149,7 @@ internal class RequestOTPViewController: UIViewController {
     }
 
     @objc func viewDidShowTnc(_ sender: UITapGestureRecognizer) {
-        router?.openTnc()
+        router.openTnc()
     }
 
     private func setButtonAlpha(isValid: Bool) {
@@ -196,7 +198,7 @@ extension RequestOTPViewController: RequestOTPPresenterOutput {
     }
 
     func success(with viewModel: RequestOTP.ViewModel) {
-        router?.pushLoginVC(with: viewModel)
+        router.goToLogin(with: viewModel)
     }
 
     func error(with message: String) {

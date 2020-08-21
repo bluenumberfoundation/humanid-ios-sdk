@@ -1,19 +1,15 @@
 import RxSwift
 
-internal protocol RequestOTPWorkerDelegate {
+internal protocol RequestOTPWorkerProtocol: AnyObject {
 
-    func requestOtp(with header: BaseRequest, request: RequestOTP.Request) -> Observable<BaseResponse<RequestOTP.Response>>
+    func requestOtp(with header: BaseRequest, and request: RequestOTP.Request) -> Observable<BaseResponse<RequestOTP.Response>>
 }
 
-internal class RequestOTPWorker: RequestOTPWorkerDelegate {
+internal final class RequestOTPWorker: RequestOTPWorkerProtocol {
 
-    var datasource: Network
+    var datasource: Network!
 
-    init(datasource: Network) {
-        self.datasource = datasource
-    }
-
-    func requestOtp(with header: BaseRequest, request: RequestOTP.Request) -> Observable<BaseResponse<RequestOTP.Response>> {
+    func requestOtp(with header: BaseRequest, and request: RequestOTP.Request) -> Observable<BaseResponse<RequestOTP.Response>> {
         return datasource.requestOtp(url: .requestOtp, header: header, request: request)
     }
 }

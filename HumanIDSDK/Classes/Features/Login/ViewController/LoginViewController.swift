@@ -1,11 +1,11 @@
 import VKPinCodeView
 
-internal protocol LoginDelegate {
+internal protocol LoginDelegate: AnyObject {
 
     func login(with viewModel: Login.ViewModel)
 }
 
-internal class LoginViewController: UIViewController {
+internal final class LoginViewController: UIViewController {
 
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var containerView: UIView!
@@ -18,6 +18,10 @@ internal class LoginViewController: UIViewController {
     @IBOutlet weak var containerViewBottom: NSLayoutConstraint!
 
     var viewModel: RequestOTP.ViewModel!
+    var input: LoginInteractorInput!
+    var router: LoginRouterProtocol!
+
+    var delegate: LoginDelegate?
 
     var timer: Timer?
     var timerTap: UITapGestureRecognizer?
@@ -30,10 +34,6 @@ internal class LoginViewController: UIViewController {
     }
 
     var bottomSheetTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
-
-    var delegate: LoginDelegate?
-    var input: LoginInteractorInput?
-    var router: LoginRoutingLogic?
 
     lazy var pinView: VKPinCodeView = {
         let pinView = VKPinCodeView()
@@ -58,15 +58,17 @@ internal class LoginViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         configureViews()
         setupListener()
         setupTimer()
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         showAnimation(isDismiss: false)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        input.dispose()
     }
 
     func configureViews() {
@@ -138,7 +140,7 @@ internal class LoginViewController: UIViewController {
     }
 
     @objc func viewDidShowTnc(_ sender: UITapGestureRecognizer) {
-        router?.openTnc()
+        router.openTnc()
     }
 
     @objc func viewDidResendCode(_ sender: UITapGestureRecognizer) {
@@ -149,7 +151,7 @@ internal class LoginViewController: UIViewController {
         let clientSecret = KeyChain.retrieves(key: .clientSecret) ?? ""
         let header = BaseRequest(clientId: clientId, clientSecret: clientSecret)
 
-        input?.requestOtp(with: header, request: .init(
+        input.requestOtp(with: header, and: .init(
             countryCode: viewModel.countryCode,
             phone: viewModel.phone)
         )
@@ -193,7 +195,7 @@ internal class LoginViewController: UIViewController {
 
         let deviceId = KeyChain.retrieves(key: .deviceID) ?? ""
 
-        input?.login(with: header, request: .init(
+        input.login(with: header, and: .init(
             countryCode: viewModel.countryCode,
             phone: viewModel.phone,
             deviceTypeId: .ios,

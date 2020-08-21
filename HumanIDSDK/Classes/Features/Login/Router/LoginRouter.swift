@@ -1,15 +1,9 @@
-internal protocol LoginRoutingLogic {
+internal protocol LoginRouterProtocol: AnyObject {
 
     func openTnc()
 }
 
-internal class LoginRouter: LoginRoutingLogic {
-
-    weak var view: LoginViewController?
-
-    init(view: LoginViewController) {
-        self.view = view
-    }
+internal final class LoginRouter: LoginRouterProtocol {
 
     func openTnc() {
         UIApplication.shared.open(.tnc)

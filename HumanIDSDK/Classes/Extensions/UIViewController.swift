@@ -5,6 +5,7 @@ internal extension UIViewController {
         alertVC.addAction(UIAlertAction(title: "Close", style: .default, handler: { (Void) in
             completion(true)
         }))
+
         present(alertVC, animated: true)
     }
 }

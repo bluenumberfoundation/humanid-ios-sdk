@@ -2,7 +2,7 @@ import UIKit
 import HumanIDSDK
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
@@ -12,17 +12,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let clientSecret = "12FZ3llRg5KFDuJFLftOxlQof1DKBtgL7mZrY4AE1zaM78o1Fvza2IZdKjdxT45Q"
         HumanIDSDK.shared.configure(clientID: clientID, clientSecret: clientSecret)
 
-        let rootVC = getRootVC()
-        let navVC = UINavigationController(rootViewController: rootVC)
-
+        let contoller = UINavigationController(rootViewController: getController())
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navVC
+        window?.rootViewController = contoller
         window?.makeKeyAndVisible()
 
         return true
     }
 
-    private func getRootVC() -> UIViewController {
+    private func getController() -> UIViewController {
         return Cache.shared.getToken() != nil ? HomeViewController() : LoginViewController()
     }
 }

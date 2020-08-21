@@ -1,18 +1,22 @@
 import Swinject
 
-internal class MainConfigurator: Assembly {
+internal final class MainConfigurator: Assembly {
 
     func assemble(container: Container) {
-        container.register(MainRoutingLogic.self) { (r, view: MainViewController) in
-            return MainRouter(view: view)
+        container.register(MainRouterProtocol.self) { (r, controller: MainViewController) in
+            let router = MainRouter()
+            router.controller = controller
+
+            return router
         }
 
         container.register(MainViewController.self) { (r) in
-            let view = MainViewController()
-            let router = r.resolve(MainRoutingLogic.self, argument: view)!
-            view.router = router
+            let controller = MainViewController()
+            let router = r.resolve(MainRouterProtocol.self, argument: controller)!
 
-            return view
+            controller.router = router
+
+            return controller
         }
     }
 }
