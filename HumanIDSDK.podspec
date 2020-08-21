@@ -22,14 +22,14 @@ Pod::Spec.new do |s|
   s.resource_bundles      = { 'HumanIDSDK' => ['HumanIDSDK/Assets/**/*.{xcassets,xib,ttf}'] }
 
   s.frameworks            = 'UIKit'
-  s.dependency 'Swinject', '~> 2.7.1'
-  s.dependency 'RxSwift', '~> 5.1.1'
-  s.dependency 'RxCocoa', '~> 5.1.1'
-  s.dependency 'RxAlamofire', '~> 5.5.0'
-  s.dependency 'FlagPhoneNumber', '~> 0.8.0'
-  s.dependency 'VKPinCodeView', '~> 0.4.1'
-  s.dependency 'IQKeyboardManager', '~> 6.5.5'
-  s.dependency 'PodAsset', '~> 1.0.0'
+  s.dependency 'Swinject', '2.7.1'
+  s.dependency 'RxSwift', '5.1.1'
+  s.dependency 'RxCocoa', '5.1.1'
+  s.dependency 'RxAlamofire', '5.6.0'
+  s.dependency 'FlagPhoneNumber', '0.8.0'
+  s.dependency 'VKPinCodeView', '0.4.1'
+  s.dependency 'IQKeyboardManager', '6.5.6'
+  s.dependency 'PodAsset', '1.0.0'
 
   s.pod_target_xcconfig   = { 'PRODUCT_BUNDLE_IDENTIFIER': 'org.humanid.HumanIDSDK' }
 end
