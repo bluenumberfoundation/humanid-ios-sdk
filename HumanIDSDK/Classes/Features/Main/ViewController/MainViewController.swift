@@ -4,6 +4,9 @@ internal final class MainViewController: UIViewController {
     @IBOutlet weak var fgView: UIView!
     @IBOutlet weak var appLogo: UIImageView!
     @IBOutlet weak var appName: UILabel!
+    @IBOutlet weak var continueLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var tncLabel: UIButton!
     @IBOutlet weak var fgViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fgViewBottom: NSLayoutConstraint!
 
@@ -27,11 +30,18 @@ internal final class MainViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        configureLocalizations()
         configureViews()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         showAnimation(isDismiss: false)
+    }
+
+    func configureLocalizations() {
+        continueLabel.text = "continue_with".localized()
+        infoLabel.text = "privacy_info".localized()
+        tncLabel.setTitle(String(format: "tnc_info".localized(), clientName), for: .normal)
     }
 
     func configureViews() {

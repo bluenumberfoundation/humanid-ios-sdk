@@ -11,7 +11,9 @@ internal final class LoginViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var pinContainerView: UIView!
     @IBOutlet weak var humanIdTnc: UILabel!
+    @IBOutlet weak var verificationLabel: UILabel!
     @IBOutlet weak var verificationInfo: UILabel!
+    @IBOutlet weak var otpInfo: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
@@ -62,6 +64,7 @@ internal final class LoginViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        configureLocalizations()
         configureViews()
         setupListener()
         setupTimer()
@@ -69,6 +72,13 @@ internal final class LoginViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         showAnimation(isDismiss: false)
+    }
+
+    func configureLocalizations() {
+        humanIdTnc.text = "humanid_tnc_info".localized()
+        verificationLabel.text = "verification_label".localized()
+        verificationInfo.text = String(format: "verification_info".localized(), viewModel.countryCode, viewModel.phone)
+        otpInfo.text = "otp_info".localized()
     }
 
     func configureViews() {
@@ -85,8 +95,6 @@ internal final class LoginViewController: UIViewController {
         pinView.leadingAnchor.constraint(equalTo: pinContainerView.leadingAnchor, constant: 40).isActive = true
         pinView.trailingAnchor.constraint(equalTo: pinContainerView.trailingAnchor, constant: -40).isActive = true
         pinView.centerYAnchor.constraint(equalTo: pinContainerView.centerYAnchor).isActive = true
-
-        verificationInfo.text = "We just sent a text to (+\(viewModel.countryCode)) \(viewModel.phone). We will not save or forward this number after the verification"
 
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -166,7 +174,7 @@ internal final class LoginViewController: UIViewController {
             resetTimerLabel()
         default:
             let timer = TimeInterval(seconds).toMinutesSeconds()
-            timerLabel.text = "Resend code in \(timer)"
+            timerLabel.text = String(format: "resend_code_start".localized(), timer)
             timerLabel.isUserInteractionEnabled = false
             timerLabel.removeGestureRecognizer(timerTap!)
         }
@@ -210,7 +218,7 @@ internal final class LoginViewController: UIViewController {
     }
 
     private func resetTimerLabel() {
-        timerLabel.text = "Resend code"
+        timerLabel.text = "resend_code_stop".localized()
         timerLabel.isUserInteractionEnabled = true
         timerLabel.addGestureRecognizer(timerTap!)
     }

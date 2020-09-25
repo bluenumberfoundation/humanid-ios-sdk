@@ -1,7 +1,7 @@
 internal enum FontType {
     case titiliumWebRegular
     case titiliumWebBold
-    case titiliumWebSemiBold
+    case titiliumWebMedium
 }
 
 internal extension UIFont {
@@ -12,13 +12,13 @@ internal extension UIFont {
             return UIFont(name: "Roboto-Regular", size: size)
         case .titiliumWebBold:
             return UIFont(name: "Roboto-Bold", size: size)
-        case .titiliumWebSemiBold:
-            return UIFont(name: "Roboto-SemiBold", size: size)
+        case .titiliumWebMedium:
+            return UIFont(name: "Roboto-Medium", size: size)
         }
     }
 
     static func mainFont(ofSize size: CGFloat) -> UIFont {
-        return font(type: .titiliumWebSemiBold, size: size)!
+        return font(type: .titiliumWebMedium, size: size)!
     }
 
     private func customFont(name: String, size: CGFloat) -> UIFont {

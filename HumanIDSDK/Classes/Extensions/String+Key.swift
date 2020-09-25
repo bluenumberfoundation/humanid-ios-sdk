@@ -1,14 +1,18 @@
 internal extension String {
 
     static var clientID: String {
-        return "ClientIDKeyForKeyChain"
+        return "client_id"
     }
 
     static var clientSecret: String {
-        return "ClientSecretKeyForKeyChain"
+        return "client_secret"
     }
 
     static var deviceID: String {
-        return "DeviceIDKeyForKeyChain"
+        return "device_id"
+    }
+
+    func localized() -> String {
+        return NSLocalizedString(self, bundle: Bundle.humanID, comment: "")
     }
 }

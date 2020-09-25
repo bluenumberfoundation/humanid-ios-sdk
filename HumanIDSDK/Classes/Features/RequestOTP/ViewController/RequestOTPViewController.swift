@@ -45,6 +45,7 @@ internal final class RequestOTPViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        configureLocalizations()
         configureViews()
         setupListener()
         setupFormValidation()
@@ -54,13 +55,51 @@ internal final class RequestOTPViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
+    func configureLocalizations() {
+        let verifyText = "verify_text".localized()
+        let verifyString = NSMutableAttributedString(string: verifyText)
+
+        let verifyTextClient = "verify_text_client".localized()
+        let verifyStringClient = NSMutableAttributedString(string: verifyTextClient)
+
+        let verifyBoldText = "verify_text_bold".localized()
+        let verifyAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
+        let verifyAttributed = NSMutableAttributedString(string: verifyBoldText, attributes: verifyAttrs)
+        let verifyClientAttributed = NSMutableAttributedString(string: clientName, attributes: verifyAttrs)
+
+        verifyString.append(verifyAttributed)
+        verifyStringClient.append(verifyClientAttributed)
+
+        let verifyAllString = NSMutableAttributedString()
+        verifyAllString.append(verifyString)
+        verifyAllString.append(verifyStringClient)
+        verifyAllString.append(NSMutableAttributedString(string: "verify_all".localized()))
+
+        verifyLabel.attributedText = verifyAllString
+
+        phoneNumberTextField.placeholder = "phone_number".localized()
+        phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: phoneNumberTextField.placeholder ?? "", attributes: [.foregroundColor: UIColor.gray])
+
+        enterButton.setTitle("enter_text".localized().uppercased(), for: .normal)
+
+        let tncText = "tnc_text".localized()
+        let tncString = NSMutableAttributedString(string: tncText)
+
+        let tncBoldText = "tnc_text_bold".localized()
+        let tncAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10)]
+        let tncAttributed = NSMutableAttributedString(string: tncBoldText, attributes: tncAttrs)
+
+        tncString.append(tncAttributed)
+
+        verifyTnc.attributedText = tncString
+
+        cancelLabel.setTitle("cancel_text".localized(), for: .normal)
+    }
+
     func configureViews() {
         view.backgroundColor = .twilightBlue
 
         loadingView.isHidden = true
-
-        phoneNumberTextField.placeholder = "Enter Phone Number"
-        phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: phoneNumberTextField.placeholder ?? "", attributes: [.foregroundColor: UIColor.gray])
 
         listController.setup(repository: phoneNumberTextField.countryRepository)
         listController.didSelect = { [weak self] country in
@@ -72,38 +111,6 @@ internal final class RequestOTPViewController: UIViewController {
         enterButton.backgroundColor = .lightMusrad
         enterButton.tintColor = .twilightBlue
         enterButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-
-        let verifyText = "humanID confirms your phone number "
-        let verifyString = NSMutableAttributedString(string: verifyText)
-
-        let verifyTextClient = " sharing it with "
-        let verifyStringClient = NSMutableAttributedString(string: verifyTextClient)
-
-        let verifyBoldText = "without"
-        let verifyAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
-        let verifyAttributed = NSMutableAttributedString(string: verifyBoldText, attributes: verifyAttrs)
-        let verifyClientAttributed = NSMutableAttributedString(string: clientName, attributes: verifyAttrs)
-
-        verifyString.append(verifyAttributed)
-        verifyStringClient.append(verifyClientAttributed)
-
-        let verifyAllString = NSMutableAttributedString()
-        verifyAllString.append(verifyString)
-        verifyAllString.append(verifyStringClient)
-        verifyAllString.append(NSMutableAttributedString(string: ".\nYour data is permanently deleted after verification."))
-
-        verifyLabel.attributedText = verifyAllString
-
-        let tncText = "humanID gives you back control over your privacy. The non profit organization authenticates you without sharing your data or retaining your data.\n"
-        let tncString = NSMutableAttributedString(string: tncText)
-
-        let tncBoldText = "Learn More"
-        let tncAttrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10)]
-        let tncAttributed = NSMutableAttributedString(string: tncBoldText, attributes: tncAttrs)
-
-        tncString.append(tncAttributed)
-
-        verifyTnc.attributedText = tncString
     }
 
     func setupListener() {
@@ -165,7 +172,7 @@ extension RequestOTPViewController: FPNTextFieldDelegate {
 
     func fpnDisplayCountryList() {
         let navVC = UINavigationController(rootViewController: listController)
-        listController.title = "Countries"
+        listController.title = "country_text".localized()
 
         present(navVC, animated: true) {
             DispatchQueue.main.async {

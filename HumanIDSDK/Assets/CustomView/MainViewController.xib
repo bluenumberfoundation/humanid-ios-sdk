@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -27,9 +27,12 @@
                 <outlet property="appLogo" destination="n5Y-CS-d21" id="0Gq-oB-Dhm"/>
                 <outlet property="appName" destination="8GN-8M-BEr" id="Oqa-ZS-tTv"/>
                 <outlet property="bgView" destination="6Zd-YK-7VM" id="gBY-m8-XKn"/>
+                <outlet property="continueLabel" destination="sdU-Ub-ffw" id="O1k-1e-voJ"/>
                 <outlet property="fgView" destination="3e9-7m-dY2" id="yOz-cA-UPT"/>
                 <outlet property="fgViewBottom" destination="qk2-jh-3ws" id="luo-4Q-oaH"/>
                 <outlet property="fgViewHeight" destination="tNQ-7S-NyL" id="OhQ-eY-96d"/>
+                <outlet property="infoLabel" destination="7S3-gB-ArU" id="Byj-en-ODg"/>
+                <outlet property="tncLabel" destination="is5-xf-IcG" id="5dx-9E-qYc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -64,8 +67,8 @@
                                 <constraint firstAttribute="width" constant="45" id="TUH-Xj-74D"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie DB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GN-8M-BEr">
-                            <rect key="frame" x="177" y="107" width="60" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GN-8M-BEr">
+                            <rect key="frame" x="193" y="107" width="28" height="17"/>
                             <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -125,7 +128,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="is5-xf-IcG">
                             <rect key="frame" x="16" y="224" width="382" height="25"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="11"/>
-                            <state key="normal" title="I hereby agree to Movie DB terms of service">
+                            <state key="normal" title="I hereby agree to Application terms of service">
                                 <color key="titleColor" red="1" green="0.85490196078431369" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
