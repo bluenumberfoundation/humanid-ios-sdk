@@ -21,8 +21,8 @@ Meet humanID - An anonymous online identity, enabling platforms to offer the spe
 
 ## Requirements
 
-* Xcode 11.4+
-* Swift 5.0
+* Xcode 11.0+
+* Swift 5.0+
 * iOS 11.0+
 * [Clean Swift](https://clean-swift.com) VIP architecture
 
@@ -31,12 +31,11 @@ Meet humanID - An anonymous online identity, enabling platforms to offer the spe
 ## Built with
 
 * [Swinject](https://github.com/Swinject/Swinject) - Dependency injection framework for Swift with iOS/macOS/Linux
-* [RxSwift](https://github.com/ReactiveX/RxSwift) - Reactive Programming in Swift
 * [RxAlamofire](https://github.com/RxSwiftCommunity/RxAlamofire) - RxSwift wrapper around the elegant HTTP networking in Swift Alamofire
+* [RxSwift](https://github.com/ReactiveX/RxSwift) - Reactive Programming in Swift
 * [FlagPhoneNumber](https://github.com/chronotruck/FlagPhoneNumber) - A formatted phone number UITextField with country flag picker.
-* [VKPinCodeView](https://github.com/Sunspension/VKPinCodeView) - VKPinCodeView is simple and elegant UI component for input PIN. You can easily customise appearance and get auto fill (OTP) iOS 12 feature right from the box.
 * [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) - Codeless drop-in universal library allows to prevent issues of keyboard sliding up and cover UITextField/UITextView. Neither need to write any code nor any setup required and much more.
-* [PodAsset](https://github.com/haifengkao/PodAsset) - Unable to find cocoapods resources? Here is the solution!
+* [VKPinCodeView](https://github.com/Sunspension/VKPinCodeView) - VKPinCodeView is simple and elegant UI component for input PIN. You can easily customise appearance and get auto fill (OTP) iOS 12 feature right from the box.
 
 ## Installation
 
@@ -63,6 +62,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
      HumanIDSDK.shared.configure(clientID: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET")
+  }
+}
+```
+
+***(Optional) for Sandbox environment***
+
+```swift
+import HumanIDSDK
+
+@UIApplicationMain
+final class AppDelegate: UIResponder, UIApplicationDelegate {
+
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+     HumanIDSDK.shared.configure(clientID: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET", isSandbox: true)
   }
 }
 ```
