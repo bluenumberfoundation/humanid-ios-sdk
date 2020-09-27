@@ -1,0 +1,27 @@
+// Common
+"close" = "Kapat";
+
+// MainViewController
+"continue_with" = "İle devam et";
+"privacy_info" = "(tam gizlilik için önerilir)";
+"tnc_info" = "%@ hizmet şartlarını kabul ediyorum";
+
+// RequestOTPViewController
+"verify_text" = "humanID telefon numaranızı onaylar ";
+"verify_text_client" = " ile paylaşmak ";
+"verify_text_bold" = "olmadan";
+"verify_all" = ".\nVerileriniz doğrulandıktan sonra kalıcı olarak silinir.";
+"phone_number" = "Telefon numarası";
+"enter_text" = "Giriş";
+"tnc_text" = "humanID, gizliliğiniz üzerinde size tekrar kontrol sağlar. Kar amacı gütmeyen kuruluş, verilerinizi paylaşmadan veya verilerinizi saklamadan kimliğinizi doğrular.\n";
+"tnc_text_bold" = "Daha fazla bilgi edin";
+"cancel_text" = "İptal etmek";
+"country_text" = "Ülkeler";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID, insanlara gizliliği ve interneti geri veren bağımsız ve açık çevrimiçi - ID 'tir. Misyonumuzu Öğrenin";
+"verification_label" = "Doğrulama Numarası";
+"verification_info" = "Az önce (+%@) %@ numarasına bir kısa mesaj gönderdik. Doğrulamadan sonra bu numarayı kaydetmeyeceğiz veya iletmeyeceğiz";
+"otp_info" = "Lütfen SMS olarak aldığınız 4 haneli kodu girin";
+"resend_code_start" = "%@ içinde kodu yeniden gönder";
+"resend_code_stop" = "Yeniden gönderme kodu";

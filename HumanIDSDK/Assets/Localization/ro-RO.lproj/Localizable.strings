@@ -1,0 +1,27 @@
+// Common
+"close" = "Închide";
+
+// MainViewController
+"continue_with" = "Continuă cu";
+"privacy_info" = "(recomandat pentru confidențialitate completă)";
+"tnc_info" = "Sunt de acord cu termenii și condițiile %@";
+
+// RequestOTPViewController
+"verify_text" = "humanID vă confirmă numărul de telefon ";
+"verify_text_client" = " împărtășindu-l cu ";
+"verify_text_bold" = "fără";
+"verify_all" = ".\nDatele dvs sunt șterse definitiv după verificare.";
+"phone_number" = "Numar de telefon";
+"enter_text" = "introduce";
+"tnc_text" = "humanID vă oferă înapoi controlul asupra confidențialității. Organizația non-profit vă autentifică fără a vă partaja datele sau a vă păstra datele.\n";
+"tnc_text_bold" = "Aflați mai multe";
+"cancel_text" = "Anulare";
+"country_text" = "Țări";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID este ID - online independent și deschis, care redă confidențialității și internetului oamenilor. Aflați despre misiunea noastră";
+"verification_label" = "numar de verificare";
+"verification_info" = "Tocmai am trimis un text către (+%@) %@. Nu vom salva sau redirecționa acest număr după verificare";
+"otp_info" = "Vă rugăm să introduceți codul de 4 cifre pe care l-ați primit ca SMS";
+"resend_code_start" = "Retrimiteți codul în %@";
+"resend_code_stop" = "Retrimite codul";

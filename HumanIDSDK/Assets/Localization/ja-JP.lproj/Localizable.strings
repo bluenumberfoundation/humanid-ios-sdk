@@ -1,0 +1,27 @@
+// Common
+"close" = "閉じる";
+
+// MainViewController
+"continue_with" = "を続行";
+"privacy_info" = "(完全なプライバシーのために推奨)";
+"tnc_info" = "私はここに %@ の利用規約に同意します";
+
+// RequestOTPViewController
+"verify_text" = "humanID はあなたの電話番号を確認します ";
+"verify_text_client" = " と共有する ";
+"verify_text_bold" = "なし";
+"verify_all" = ".\n確認後、データは完全に削除されます.";
+"phone_number" = "電話番号";
+"enter_text" = "入る";
+"tnc_text" = "humanID を使用すると、プライバシーを制御できます. 非営利団体は、データを共有したり、データを保持したりせずに認証を行います.\n";
+"tnc_text_bold" = "もっと詳しく知る";
+"cancel_text" = "キャンセル";
+"country_text" = "国々";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID は、プライバシーとインターネットを人間に還元する、独立したオープンなオンライン ID - です. 私たちの使命について学ぶ";
+"verification_label" = "識別番号";
+"verification_info" = "(+%@) %@. にテキストを送信しました確認後にこの番号を保存または転送しません";
+"otp_info" = "SMS として受け取った 4 桁のコードを入力してください";
+"resend_code_start" = "%@ でコードを再送する";
+"resend_code_stop" = "コードを再送する";

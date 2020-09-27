@@ -1,0 +1,27 @@
+// Common
+"close" = "Tutup";
+
+// MainViewController
+"continue_with" = "Teruskan dengan";
+"privacy_info" = "(disyorkan untuk privasi penuh)";
+"tnc_info" = "Dengan ini saya bersetuju dengan syarat perkhidmatan %@";
+
+// RequestOTPViewController
+"verify_text" = "humanID mengesahkan nombor telefon anda ";
+"verify_text_client" = " berkongsi dengan ";
+"verify_text_bold" = "tanpa";
+"verify_all" = ".\nData anda dipadamkan secara kekal setelah pengesahan.";
+"phone_number" = "Nombor telefon";
+"enter_text" = "Masukkan";
+"tnc_text" = "humanID memberi anda kawalan semula terhadap privasi anda. Organisasi bukan keuntungan mengesahkan anda tanpa berkongsi data anda atau menyimpan data anda.\n";
+"tnc_text_bold" = "Ketahui lebih lanjut";
+"cancel_text" = "Batal";
+"country_text" = "Negara";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID adalah ID dalam talian bebas & terbuka - memberikan kembali privasi, dan internet, kepada manusia. Ketahui Mengenai Misi Kami";
+"verification_label" = "Nombor Pengesahan";
+"verification_info" = "Kami baru sahaja menghantar teks ke (+%@) %@. Kami tidak akan menyimpan atau meneruskan nombor ini selepas pengesahan";
+"otp_info" = "Masukkan kod 4 digit yang anda terima sebagai SMS";
+"resend_code_start" = "Hantar semula kod dalam %@";
+"resend_code_stop" = "Hantar semula kod";

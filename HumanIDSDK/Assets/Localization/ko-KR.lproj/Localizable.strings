@@ -1,0 +1,27 @@
+// Common
+"close" = "닫기";
+
+// MainViewController
+"continue_with" = "계속";
+"privacy_info" = "(완전한 개인 정보 보호를 위해 권장 됨)";
+"tnc_info" = "%@ 서비스 약관에 동의합니다";
+
+// RequestOTPViewController
+"verify_text" = "humanID 는 전화 번호를 확인합니다 ";
+"verify_text_client" = " 그것을 공유 ";
+"verify_text_bold" = "없이";
+"verify_all" = ".\n귀하의 데이터는 확인 후 영구적으로 삭제됩니다.";
+"phone_number" = "전화 번호";
+"enter_text" = "시작하다";
+"tnc_text" = "humanID 를 사용하면 개인 정보를 다시 제어 할 수 있습니다. 비영리 조직은 귀하의 데이터를 공유하거나 보관하지 않고 귀하를 인증합니다 .\n";
+"tnc_text_bold" = "더 알아보기";
+"cancel_text" = "취소";
+"country_text" = "국가";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID 는 인간에게 프라이버시와 인터넷을 되돌려주는 독립적이고 개방적인 온라인 ID - 입니다. 우리의 사명에 대해 알아보기";
+"verification_label" = "확인 번호";
+"verification_info" = "(+%@) %@. 에게 문자를 보냈습니다 확인 후이 번호를 저장하거나 전달하지 않습니다";
+"otp_info" = "SMS 로받은 4 자리 코드를 입력하세요";
+"resend_code_start" = "%@ 로 코드 재전송";
+"resend_code_stop" = "코드 재전송";

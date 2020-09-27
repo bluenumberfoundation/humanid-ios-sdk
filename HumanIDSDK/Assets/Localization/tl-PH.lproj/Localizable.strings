@@ -1,0 +1,27 @@
+// Common
+"close" = "Isara";
+
+// MainViewController
+"continue_with" = "Magpatuloy sa";
+"privacy_info" = "(inirekomenda para sa buong privacy)";
+"tnc_info" = "Sumasang-ayon ako sa %@ mga tuntunin ng serbisyo";
+
+// RequestOTPViewController
+"verify_text" = "Kinumpirma ng humanID ang numero ng iyong telepono ";
+"verify_text_client" = " pagbabahagi nito sa ";
+"verify_text_bold" = "wala";
+"verify_all" = ".\nAng iyong data ay permanenteng natanggal pagkatapos ng pag-verify.";
+"phone_number" = "Numero ng telepono";
+"enter_text" = "Pasok";
+"tnc_text" = "Binibigyan ka ng humanID ng kontrol sa iyong privacy. Pinapatunayan ka ng samahang non profit nang hindi ibinabahagi ang iyong data o pinapanatili ang iyong data.\n";
+"tnc_text_bold" = "Matuto nang higit pa";
+"cancel_text" = "Kanselahin";
+"country_text" = "Mga Bansa";
+
+// LoginViewController
+"humanid_tnc_info" = "Ang humanID ay ang malaya at bukas na online na ID - na nagbabalik ng privacy, at ang internet, sa mga tao. Alamin ang Tungkol sa aming Mission";
+"verification_label" = "Numero ng Pagpapatunay";
+"verification_info" = "Nagpadala lang kami ng isang text kay (+%@) %@. Hindi namin mai-save o ipapasa ang numerong ito pagkatapos ng pag-verify";
+"otp_info" = "Mangyaring ipasok ang 4 digit na code na iyong natanggap bilang SMS";
+"resend_code_start" = "Ipadala muli ang code sa %@";
+"resend_code_stop" = "Ipadala muli ang code";

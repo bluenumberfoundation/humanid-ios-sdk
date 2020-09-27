@@ -1,0 +1,27 @@
+// Common
+"close" = "关";
+
+// MainViewController
+"continue_with" = "继续";
+"privacy_info" = "(推荐用于完全隐私)";
+"tnc_info" = "我特此同意 %@ 的服务条款";
+
+// RequestOTPViewController
+"verify_text" = "humanID 确认您的电话号码 ";
+"verify_text_client" = " 与他人分享 ";
+"verify_text_bold" = "没有";
+"verify_all" = ".\n验证后，您的数据将被永久删除.";
+"phone_number" = "电话号码";
+"enter_text" = "输入";
+"tnc_text" = "humanID 可以让您对隐私进行回控制. 非营利组织无需共享数据或保留您的数据即可对您进行身份验证.\n";
+"tnc_text_bold" = "学到更多";
+"cancel_text" = "取消";
+"country_text" = "国别";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID 是独立的开放在线 - ID，可将隐私和互联网回报给人类. 了解我们的使命";
+"verification_label" = "验证号码";
+"verification_info" = "我们刚刚向 (+%@) %@ 发送了文本. 验证后，我们将不会保存或转发此号码";
+"otp_info" = "请输入您作为 SMS 收到的 4 位数代码";
+"resend_code_start" = "重新发送 %@ 中的代码";
+"resend_code_stop" = "重新发送验证码";

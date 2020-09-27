@@ -1,0 +1,27 @@
+// Common
+"close" = "Vicino";
+
+// MainViewController
+"continue_with" = "Continua con";
+"privacy_info" = "(consigliato per la massima privacy)";
+"tnc_info" = "Con la presente accetto i termini di servizio di %@";
+
+// RequestOTPViewController
+"verify_text" = "humanID conferma il tuo numero di telefono ";
+"verify_text_client" = " condividendolo con ";
+"verify_text_bold" = "senza";
+"verify_all" = ".\nI tuoi dati vengono eliminati definitivamente dopo la verifica.";
+"phone_number" = "Numero di telefono";
+"enter_text" = "accedere";
+"tnc_text" = "humanID ti restituisce il controllo sulla tua privacy. L'organizzazione senza scopo di lucro ti autentica senza condividere o conservare i tuoi dati.\n";
+"tnc_text_bold" = "Per saperne di più";
+"cancel_text" = "Annulla";
+"country_text" = "Paesi";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID è il ID - online indipendente e aperto che restituisce privacy e Internet agli esseri umani. Scopri la nostra missione";
+"verification_label" = "Numero di verifica";
+"verification_info" = "Abbiamo appena inviato un messaggio a (+%@) %@. Non salveremo o inoltreremo questo numero dopo la verifica";
+"otp_info" = "Inserisci il codice a 4 cifre che hai ricevuto come SMS";
+"resend_code_start" = "Invia di nuovo il codice in %@";
+"resend_code_stop" = "Codice di rispedizione";

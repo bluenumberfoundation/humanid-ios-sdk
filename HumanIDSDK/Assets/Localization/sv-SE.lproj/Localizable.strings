@@ -1,0 +1,27 @@
+// Common
+"close" = "Stänga";
+
+// MainViewController
+"continue_with" = "Fortsätt med";
+"privacy_info" = "(rekommenderas för fullständig integritet)";
+"tnc_info" = "Jag godkänner härmed %@ användarvillkor";
+
+// RequestOTPViewController
+"verify_text" = "humanID bekräftar ditt telefonnummer ";
+"verify_text_client" = " dela den med ";
+"verify_text_bold" = "utan";
+"verify_all" = ".\nDina uppgifter raderas permanent efter verifiering.";
+"phone_number" = "Telefonnummer";
+"enter_text" = "Stiga på";
+"tnc_text" = "humanID ger dig tillbaka kontroll över din integritet. Den ideella organisationen autentiserar dig utan att dela dina data eller behålla dina data.\n";
+"tnc_text_bold" = "Läs mer";
+"cancel_text" = "Avbryt";
+"country_text" = "Länder";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID är den oberoende och öppna online - ID som ger tillbaka integritet och internet till människor. Lär dig mer om vårt uppdrag";
+"verification_label" = "Verifieringsnummer";
+"verification_info" = "Vi skickade precis en text till (+%@) %@. Vi kommer inte att spara eller vidarebefordra detta nummer efter verifieringen";
+"otp_info" = "Ange den 4 siffriga koden du fick som SMS";
+"resend_code_start" = "Skicka koden igen i %@";
+"resend_code_stop" = "Återsänd koden";

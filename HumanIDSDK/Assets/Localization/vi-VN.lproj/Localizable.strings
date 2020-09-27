@@ -1,0 +1,27 @@
+// Common
+"close" = "Đóng";
+
+// MainViewController
+"continue_with" = "Tiếp tục với";
+"privacy_info" = "(được khuyến nghị để bảo mật đầy đủ)";
+"tnc_info" = "Tôi đồng ý với %@ điều khoản dịch vụ";
+
+// RequestOTPViewController
+"verify_text" = "humanID xác nhận số điện thoại của bạn ";
+"verify_text_client" = " chia sẻ nó với ";
+"verify_text_bold" = "không có";
+"verify_all" = ".\nDữ liệu của bạn sẽ bị xóa vĩnh viễn sau khi xác minh.";
+"phone_number" = "Số điện thoại";
+"enter_text" = "Đi vào";
+"tnc_text" = "humanID cho phép bạn kiểm soát lại quyền riêng tư của mình. Tổ chức phi lợi nhuận xác thực bạn mà không cần chia sẻ dữ liệu hoặc giữ lại dữ liệu của bạn.\n";
+"tnc_text_bold" = "Tìm hiểu thêm";
+"cancel_text" = "Huỷ bỏ";
+"country_text" = "Quốc gia";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID là - ID trực tuyến độc lập và cởi mở trao lại quyền riêng tư và Internet cho con người. Tìm hiểu về Sứ mệnh của Chúng tôi";
+"verification_label" = "Số xác minh";
+"verification_info" = "Chúng tôi vừa gửi một tin nhắn tới (+%@) %@. Chúng tôi sẽ không lưu hoặc chuyển tiếp số này sau khi xác minh";
+"otp_info" = "Vui lòng nhập mã 4 chữ số bạn nhận được dưới dạng SMS";
+"resend_code_start" = "Gửi lại mã sau %@";
+"resend_code_stop" = "Mã gửi lại";

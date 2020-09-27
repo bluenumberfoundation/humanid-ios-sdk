@@ -10,11 +10,12 @@
 		1F5A386724718E3000C384A8 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A386624718E3000C384A8 /* Cache.swift */; };
 		1FD4771924446A3400688A9E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD4771724446A3400688A9E /* LoginViewController.swift */; };
 		1FD4771A24446A3400688A9E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD4771824446A3400688A9E /* LoginViewController.xib */; };
+		1FD6836225218D3E0018D7FC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD6836125218D3D0018D7FC /* LaunchScreen.xib */; };
+		1FD6836525218D4F0018D7FC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FD6836325218D4F0018D7FC /* Localizable.strings */; };
 		1FFF6192245135B000D83F35 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF6190245135B000D83F35 /* HomeViewController.swift */; };
 		1FFF6193245135B000D83F35 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFF6191245135B000D83F35 /* HomeViewController.xib */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
-		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		662B5F4F5804DF10CCDB518C /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 285CBCA914E4C88A8623F2FA /* Pods_Tests.framework */; };
 		E88EAFE4D607189992E41310 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1479AFA9ABBE0028CCFC72 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,8 @@
 		1F5A386624718E3000C384A8 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		1FD4771724446A3400688A9E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1FD4771824446A3400688A9E /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		1FD6836125218D3D0018D7FC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		1FD6836425218D4F0018D7FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1FFF6190245135B000D83F35 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1FFF6191245135B000D83F35 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		285CBCA914E4C88A8623F2FA /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,7 +45,6 @@
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67CEC3CD42A10F4E6F839105 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,7 +146,8 @@
 			children = (
 				1FD4771624446A1E00688A9E /* Classes */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				1FD6836125218D3D0018D7FC /* LaunchScreen.xib */,
+				1FD6836325218D4F0018D7FC /* Localizable.strings */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
@@ -287,7 +290,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				1FD6836525218D4F0018D7FC /* Localizable.strings in Resources */,
+				1FD6836225218D3E0018D7FC /* LaunchScreen.xib in Resources */,
 				1FD4771A24446A3400688A9E /* LoginViewController.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				1FFF6193245135B000D83F35 /* HomeViewController.xib in Resources */,
@@ -416,12 +420,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
+		1FD6836325218D4F0018D7FC /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				607FACDF1AFB9204008FA782 /* Base */,
+				1FD6836425218D4F0018D7FC /* Base */,
 			);
-			name = LaunchScreen.xib;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

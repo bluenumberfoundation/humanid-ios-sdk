@@ -1,0 +1,27 @@
+// Common
+"close" = "Zatvoriti";
+
+// MainViewController
+"continue_with" = "Nastavite s";
+"privacy_info" = "(preporučuje se za potpunu privatnost)";
+"tnc_info" = "Ovim se slažem s %@ uvjeta pružanja usluge";
+
+// RequestOTPViewController
+"verify_text" = "humanID potvrđuje vaš telefonski broj ";
+"verify_text_client" = " dijeleći ga s ";
+"verify_text_bold" = "bez";
+"verify_all" = ".\nVaši se podaci trajno brišu nakon provjere.";
+"phone_number" = "Broj telefona";
+"enter_text" = "Unesi";
+"tnc_text" = "humanID vam vraća kontrolu nad vašom privatnošću. Neprofitna organizacija vas ovjerava bez dijeljenja ili zadržavanja podataka.\n";
+"tnc_text_bold" = "Saznajte više";
+"cancel_text" = "Otkazati";
+"country_text" = "Zemlje";
+
+// LoginViewController
+"humanid_tnc_info" = "humanID je neovisni i otvoreni internetski ID - koji ljudima vraća privatnost i internet. Saznajte o našoj misiji";
+"verification_label" = "Kontrolni broj";
+"verification_info" = "Upravo smo poslali tekst na (+%@) %@. Nećemo spremiti ili proslijediti ovaj broj nakon provjere";
+"otp_info" = "Unesite 4 znamenkasti kod koji ste dobili kao SMS";
+"resend_code_start" = "Ponovo pošalji kôd u %@";
+"resend_code_stop" = "Ponovno pošalji kôd";
